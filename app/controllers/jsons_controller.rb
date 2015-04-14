@@ -8,8 +8,8 @@ class JsonsController < ApplicationController
   end
 
   def login
-    email = params[:request][:email]
-    password = params[:request][:password]
+    email = params[:email]
+    password = params[:password]
 
     user = User.find_by(email: email)
 
