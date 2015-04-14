@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   scope 'api' do
     scope 'v1' do
       get '/' => 'jsons#hello'
+      get '/login' => 'jsons#login'
+      post '/login' => 'jsons#login'
     end
   end
 
