@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get '/' => 'jsons#hello'
       get '/login' => 'jsons#login'
       post '/login' => 'jsons#login'
+      get '/projects' => 'jsons#projects'
     end
   end
 
