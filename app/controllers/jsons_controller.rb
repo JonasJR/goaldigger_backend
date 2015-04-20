@@ -7,9 +7,9 @@ class JsonsController < ApplicationController
     user = User.find_by(email: email)
 
     if (user && user.authenticate(password))
-      response = {message: "Correct password", success: true}
+      response = {name: user.name, email: email}
     else
-      response = {message: "Invalid username or password", success: false}
+      response = {message: "Invalid username or password"}
     end
 
     respond_to do |format|
