@@ -17,6 +17,22 @@ class JsonsController < ApplicationController
     end
   end
 
+  def signup
+    user = User.new(user_params)
+
+    if user.save
+      response = {}
+      response[:name] = user.name
+      response[:email] = user.email
+      response = response.to_json
+    else
+      response = user.errors.to_json
+    end
+    respond_to do |format|
+      format.json { render text: response }
+    end
+  end
+
   def projects
     user = User.find(1)
 
@@ -48,14 +64,11 @@ class JsonsController < ApplicationController
         end
 
         projectList << { name: project.name, description: project.description, milestones: milestoneList }
-        temp = { name: project.name, description: project.description, milestones: milestoneList }
-
       end
-
       projectList
     end
 
-  def create_user
-  end
-  
+    def user_params
+      params.permit(:name, :email, :password, :password_confirmation)
+    end
 end

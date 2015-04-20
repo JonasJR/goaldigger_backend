@@ -6,19 +6,19 @@ Rails.application.routes.draw do
   get 'users/new'
   get 'users/index'
 
-  get 'signup'    => 'users#new'
-  get 'login'     => 'sessions#new'
-  post 'login'    => 'sessions#create'
-  get 'logout'    => 'sessions#destroy'
+  #get 'signup'    => 'users#new'
+  #get 'login'     => 'sessions#new'
+  #post 'login'    => 'sessions#create'
+  #get 'logout'    => 'sessions#destroy'
 
   resources :users
 
   scope 'api' do
     scope 'v1' do
-      get '/' => 'jsons#hello'
-      get '/login' => 'jsons#login'
-      post '/login' => 'jsons#login'
-      post '/projects' => 'jsons#projects'
+      post '/login'     => 'jsons#login'
+      post '/projects'  => 'jsons#projects'
+      post '/signup'    => 'jsons#signup'
+      get '/signup' => 'jsons#signup'
     end
   end
 
