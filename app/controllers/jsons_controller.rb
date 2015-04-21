@@ -1,5 +1,7 @@
 class JsonsController < ApplicationController
 
+  before_action :check_logged_in
+
   def login
     email = params[:email]
     password = params[:password]
@@ -34,10 +36,6 @@ class JsonsController < ApplicationController
   end
 
   def projects
-    user = User.find(1)
-
-    proj = {name: "proj", milestones: [{name: "mile1", items: [{name: "todo1"}, {name: "todo2"}]}]}
-
     respond_to do |format|
       format.json { render text: render_projects.to_json }
     end
@@ -46,7 +44,7 @@ class JsonsController < ApplicationController
   private 
     
     def render_projects
-      projects = User.find(1).projects.all
+      projects = @user.projects.all
 
       projectList = []
       projects.each do |project|
@@ -70,5 +68,17 @@ class JsonsController < ApplicationController
 
     def user_params
       params.permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def check_logged_in
+      user = User.find_by(email: params[:email])
+
+      if user && user.authenticate(params[:password])
+        @user = user
+      else
+        respond_to do |format|
+          format.json { render text: "Please log in first".to_json }
+        end
+      end
     end
 end
