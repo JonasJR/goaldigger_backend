@@ -1,6 +1,6 @@
 class JsonsController < ApplicationController
 
-  before_action :check_logged_in
+  before_action :check_logged_in, except: [:signup, :login]
 
   def login
     email = params[:email]
@@ -33,6 +33,15 @@ class JsonsController < ApplicationController
     respond_to do |format|
       format.json { render text: response }
     end
+  end
+
+  def add_project
+    project_name = params[:project_name]
+    @user.projects.create(project_name)
+  end
+
+  def delete_project
+    @user.projects.delete(params[:id])
   end
 
   def projects

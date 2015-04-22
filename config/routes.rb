@@ -15,10 +15,11 @@ Rails.application.routes.draw do
 
   scope 'api' do
     scope 'v1' do
-      post '/login'     => 'jsons#login'
-      post '/projects'  => 'jsons#projects'
-      post '/signup'    => 'jsons#signup'
-      get '/signup' => 'jsons#signup'
+      post '/login'       => 'jsons#login'
+      post '/projects'    => 'jsons#projects'
+      post '/signup'      => 'jsons#signup'
+      post '/add_project' => 'jsons#add_project'
+      get '/signup'       => 'jsons#signup'
     end
   end
 
