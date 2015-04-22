@@ -54,14 +54,14 @@ class JsonsController < ApplicationController
           itemList = []
 
           milestone.items.all.each do |item|
-            itemList << { name: item.name }
+            itemList << { id: item.id, name: item.name }
           end
 
-          milestoneList << { name: milestone.name, items: itemList }
+          milestoneList << { id: milestone.id, name: milestone.name, items: itemList }
 
         end
 
-        projectList << { name: project.name, description: project.description, milestones: milestoneList }
+        projectList << { id: project.id, name: project.name, description: project.description, milestones: milestoneList }
       end
       projectList
     end
