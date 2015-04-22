@@ -38,6 +38,10 @@ class JsonsController < ApplicationController
   def add_project
     project_name = params[:project_name]
     @user.projects.create(project_name)
+
+    respond_to do |format|
+      format.json { render text: "Project created!" }
+    end 
   end
 
   def delete_project
