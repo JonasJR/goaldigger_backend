@@ -36,7 +36,7 @@ class JsonsController < ApplicationController
   end
 
   def add_project
-    project_name = params[:project_name]
+    project_name = { name: params[:project_name] }
     @user.projects.create(project_name)
 
     respond_to do |format|
@@ -46,6 +46,9 @@ class JsonsController < ApplicationController
 
   def delete_project
     @user.projects.delete(params[:id])
+    respond_to do |format|
+      format.json { render text: "Project deleted!" }
+    end 
   end
 
   def projects
