@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :projects
+  has_many :items
 
   validates :password, presence: true, length: { minimum: 6 }
   validates :email, presence: true, length: { maximum: 50 }

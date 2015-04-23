@@ -66,6 +66,67 @@ class JsonsController < ApplicationController
     end
   end
 
+  def add_item
+    item_hash = { name: params[:item_name], project_id: params[:project_id], 
+                  milestone_id: params[:milestone_id], user_id: @user.id }
+    item = Item.new(item_hash)
+
+    if item.save
+      response = { success: true }
+    else
+      response = { success: false, message: item.errors.full_messages }
+    end
+
+    respond_to do |format|
+      format.json { render text: response.to_json }
+    end 
+  end
+
+  def delete_item
+    item = Item.find(params[:id])
+
+    if item.user_id == @user.id && item.delete
+      response = { success: true }
+    else
+      response = { success: false, message: item.errors.full_messages }
+    end
+
+    respond_to do |format|
+      format.json { render text: response.to_json }
+    end 
+  end
+
+  def add_milestone
+    project_id = params[:project_id]
+    milestone_hash = { name: params[:milestone_name], project_id: project_id, }
+    milestone = @user.projects.find(project_id).milestones.new(milestone_hash)
+
+    if milestone.save
+      response = { success: true }
+    else
+      response = { success: false, message: milestone.errors.full_messages }
+    end
+
+    respond_to do |format|
+      format.json { render text: response.to_json }
+    end 
+  end
+
+  def delete_milestone
+    milestone_id = params[:milestone_id]
+    project_id = params[:project_id]
+
+    if @user.projects.find(project_id).milestones.find(milestone_id).delete
+      response = { success: true }
+    else
+      response = { success: false, message: milestone.errors.full_messages }
+    end
+
+    respond_to do |format|
+      format.json { render text: response.to_json }
+    end 
+  end
+
   private 
     
     def render_projects
@@ -79,14 +140,17 @@ class JsonsController < ApplicationController
           itemList = []
 
           milestone.items.all.each do |item|
-            itemList << { id: item.id, name: item.name }
+            itemList << { id: item.id, name: item.name, done: item.done }
           end
 
           milestoneList << { id: milestone.id, name: milestone.name, items: itemList }
 
         end
-
-        projectList << { id: project.id, name: project.name, description: project.description, milestones: milestoneList }
+        itemList = []
+        project.items.all.each do |item|
+          itemList << { id: item.id, name: item.name, done: item.done }
+        end
+        projectList << { id: project.id, name: project.name, description: project.description, items: itemList, milestones: milestoneList }
       end
       projectList
     end
