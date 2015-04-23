@@ -37,17 +37,26 @@ class JsonsController < ApplicationController
 
   def add_project
     project_name = { name: params[:project_name] }
-    @user.projects.create(project_name)
+    
+    if @user.projects.create(project_name)
+      response = { success: true }
+    else
+      response = { success: false, message: @user.projects.errors.full_messages }
+    end
 
     respond_to do |format|
-      format.json { render text: "Project created!" }
+      format.json { render text: response.to_json }
     end 
   end
 
   def delete_project
-    @user.projects.delete(params[:id])
+    if @user.projects.delete(params[:id])
+      response = { success: true }
+    else
+      response = { success: false, message: "Project not found" }
+    end
     respond_to do |format|
-      format.json { render text: "Project deleted!" }
+      format.json { render text: response.to_json }
     end 
   end
 
