@@ -35,10 +35,15 @@ class JsonsController < ApplicationController
     end
   end
 
-  def toggle_item_done
+  def toggle_item
     item = Item.find(params[:item_id])
 
     item.done = !item.done
+    item.save
+
+    respond_to do |format|
+      format.json { render text: "Done: #{item.done}".to_json }
+    end
   end
 
   def add_project
