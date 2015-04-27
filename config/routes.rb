@@ -22,8 +22,10 @@ Rails.application.routes.draw do
       post '/delete_project'    => 'jsons#delete_project'
       post '/toggle_item'       => 'jsons#toggle_item'
       post '/add_item'          => 'jsons#add_item'
+      post '/delete_item'       => 'jsons#delete_item'
       post '/add_milestone'     => 'jsons#add_milestone'
-      
+      post '/delete_milestone'  => 'jsons#delete_milestone'
+            
       get '/signup'            => 'jsons#signup'
     end
   end
