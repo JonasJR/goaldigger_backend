@@ -35,6 +35,12 @@ class JsonsController < ApplicationController
     end
   end
 
+  def toggle_item_done
+    item = Item.find(params[:item_id])
+
+    item.done = !item.done
+  end
+
   def add_project
     project_name = { name: params[:project_name] }
     

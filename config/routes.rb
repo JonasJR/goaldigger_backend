@@ -20,7 +20,9 @@ Rails.application.routes.draw do
       post '/signup'            => 'jsons#signup'
       post '/add_project'       => 'jsons#add_project'
       post '/delete_project'    => 'jsons#delete_project'
-      get '/signup'             => 'jsons#signup'
+      post '/toggle_item'       => 'jsons#toggle_item'
+      
+      get '/signup'            => 'jsons#signup'
     end
   end
 
