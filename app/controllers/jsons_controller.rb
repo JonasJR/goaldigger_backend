@@ -71,9 +71,7 @@ class JsonsController < ApplicationController
   end
 
   def projects
-    respond_to do |format|
-      format.json { render text: render_projects.to_json }
-    end
+      render text: render_projects.to_json }
   end
 
   def add_item
