@@ -95,7 +95,7 @@ class JsonsController < ApplicationController
   end
 
   def delete_item
-    item = Item.find(params[:id])
+    item = Item.find(params[:item_id])
 
     if item.user_id == @user.id && item.delete
       response = { success: true }
