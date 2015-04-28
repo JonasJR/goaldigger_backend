@@ -15,9 +15,7 @@ class JsonsController < ApplicationController
       response = {message: "Invalid username or password", success: false}
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end
+    render text: response.to_json 
   end
 
   def signup
