@@ -150,7 +150,6 @@ class JsonsController < ApplicationController
 
     if user.save
       UserMailer.send_recovery_password(email, new_pass).deliver_now
-
       render text: { success: true, message: "Password sent to email: #{email}" }.to_json
     end
   end
