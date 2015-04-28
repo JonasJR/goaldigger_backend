@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       post '/add_milestone'     => 'jsons#add_milestone'
       post '/delete_milestone'  => 'jsons#delete_milestone'
       post '/reset_password'    => 'jsons#reset_password'
+      post '/change_password'   => 'jsons#change_password'
 
       get '/signup'            => 'jsons#signup'
     end
