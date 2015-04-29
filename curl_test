@@ -1,0 +1,10 @@
+
+// Login
+curl -i -H "Accept: application/json" -X POST -d '{"email":"j","password":"nisse123"}' http://goaldigger.herokuapp.com/api/v1/login.json
+
+// Create milestone
+curl -i -H "Accept: aion/json" -X POST -d '{"project_name":"Test","project_id":"1","email":"j","password":"nisse123"}' http://goaldigger.herokuapp.com/api/v1/create_milestone.json
+
+curl -i -H "Accept: aion/json" -X POST -d '{"email":"j","password":"nisse123"}' http://goaldigger.herokuapp.com/api/v1/login.json
+curl -i -H "Accept: aion/json" -X POST -d '{"email":"j","password":"nisse123"}' http://goaldigger.herokuapp.com/api/v1/login.json
+curl -i -H "Accept: aion/json" -X POST -d '{"email":"j","password":"nisse123"}' http://goaldigger.herokuapp.com/api/v1/login.json
