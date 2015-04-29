@@ -81,7 +81,7 @@ class JsonsController < ApplicationController
     item = Item.new(item_hash)
 
     if item.save
-      response = { success: true }
+      response = { success: true, item_name: item.name, item_id: item.id }
     else
       response = { success: false, message: item.errors.full_messages }
     end
