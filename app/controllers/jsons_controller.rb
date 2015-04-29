@@ -77,8 +77,7 @@ class JsonsController < ApplicationController
   end
 
   def add_item
-    item_hash = { name: params[:item_name], project_id: params[:project_id], 
-                  milestone_id: params[:milestone_id], user_id: @user.id }
+    item_hash = { name: params[:item_name], milestone_id: params[:milestone_id], user_id: @user.id }
     item = Item.new(item_hash)
 
     if item.save
@@ -86,10 +85,7 @@ class JsonsController < ApplicationController
     else
       response = { success: false, message: item.errors.full_messages }
     end
-
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end 
+    render text: response.to_json
   end
 
   def delete_item
@@ -101,9 +97,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: item.errors.full_messages }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end 
+    render text: response.to_json
   end
 
   def add_milestone
