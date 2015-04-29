@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20150428132002) do
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.string   "milestone_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id"
-    t.boolean  "done"
+    t.boolean  "done",         default: false
   end
 
   create_table "milestones", force: :cascade do |t|
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 20150428132002) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
 end
