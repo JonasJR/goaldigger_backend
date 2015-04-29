@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'friends/search_friends'
+
   get 'jsons/hello'
 
   get 'sessions/new'
@@ -21,12 +23,13 @@ Rails.application.routes.draw do
       post '/add_project'       => 'jsons#add_project'
       post '/delete_project'    => 'jsons#delete_project'
       post '/toggle_item'       => 'jsons#toggle_item'
-      post '/add_item'          => 'jsons#add_item'
+      post '/create_item'          => 'jsons#add_item'
       post '/delete_item'       => 'jsons#delete_item'
-      post '/add_milestone'     => 'jsons#add_milestone'
+      post '/create_milestone'     => 'jsons#add_milestone'
       post '/delete_milestone'  => 'jsons#delete_milestone'
       post '/reset_password'    => 'jsons#reset_password'
       post '/change_password'   => 'jsons#change_password'
+      post '/search_friends'    => 'friends#search_friends'
 
       get '/signup'            => 'jsons#signup'
     end

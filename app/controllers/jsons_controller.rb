@@ -73,11 +73,7 @@ class JsonsController < ApplicationController
   end
 
   def projects
-<<<<<<< HEAD
-    render text: render_projects.to_json
-=======
-      render text: render_projects(@user).to_json
->>>>>>> ceba05d713d6f453e03e52e6bcf174337967a0c5
+    render text: render_projects(@user).to_json
   end
 
   def add_item
