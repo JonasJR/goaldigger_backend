@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
 
   def search_friends
     search_phrase = params[:search_phrase]
-    users = User.select(:name, :email).where("name ILIKE ? OR email ILIKE ?", search_phrase, search_phrase)
+    users = User.select(:name, :email).where("name ILIKE %?% OR email ILIKE %?%", search_phrase, search_phrase)
 
     render text: users.to_json
   end
