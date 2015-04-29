@@ -71,7 +71,7 @@ class JsonsController < ApplicationController
   end
 
   def projects
-      render text: render_projects.to_json }
+    render text: render_projects.to_json
   end
 
   def add_item
@@ -206,11 +206,7 @@ class JsonsController < ApplicationController
         milestoneList << { id: milestone.id, name: milestone.name, items: itemList }
 
       end
-      itemList = []
-      project.items.all.each do |item|
-        itemList << { id: item.id, name: item.name, done: item.done }
-      end
-      projectList << { id: project.id, name: project.name, description: project.description, items: itemList, milestones: milestoneList }
+      projectList << { id: project.id, name: project.name, description: project.description, milestones: milestoneList }
     end
     projectList
   end

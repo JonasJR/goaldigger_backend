@@ -1,24 +1,833 @@
-HTTP/1.1 503 Service Unavailable
-Connection: keep-alive
-Server: Cowboy
-Date: Tue, 28 Apr 2015 13:59:50 GMT
-Content-Length: 484
+HTTP/1.1 404 Not Found 
 Content-Type: text/html; charset=utf-8
-Cache-Control: no-cache, no-store
+Content-Length: 45957
+X-Request-Id: aa9b6f4b-d4c4-4c89-997d-6f5c3be17061
+X-Runtime: 0.182592
+Server: WEBrick/1.3.1 (Ruby/2.1.2/2014-05-08)
+Date: Tue, 28 Apr 2015 14:36:00 GMT
+Connection: Keep-Alive
 
 <!DOCTYPE html>
-    <html>
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <style type="text/css">
-        html, body, iframe { margin: 0; padding: 0; height: 100%; }
-        iframe { display: block; width: 100%; border: none; }
-      </style>
-    <title>Application Error</title>
-    </head>
-    <body>
-      <iframe src="//s3.amazonaws.com/heroku_pages/error.html">
-        <p>Application Error</p>
-      </iframe>
-    </body>
-    </html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Action Controller: Exception caught</title>
+  <style>
+    body {
+      background-color: #FAFAFA;
+      color: #333;
+      margin: 0px;
+    }
+
+    body, p, ol, ul, td {
+      font-family: helvetica, verdana, arial, sans-serif;
+      font-size:   13px;
+      line-height: 18px;
+    }
+
+    pre {
+      font-size: 11px;
+      white-space: pre-wrap;
+    }
+
+    pre.box {
+      border: 1px solid #EEE;
+      padding: 10px;
+      margin: 0px;
+      width: 958px;
+    }
+
+    header {
+      color: #F0F0F0;
+      background: #C52F24;
+      padding: 0.5em 1.5em;
+    }
+
+    h1 {
+      margin: 0.2em 0;
+      line-height: 1.1em;
+      font-size: 2em;
+    }
+
+    h2 {
+      color: #C52F24;
+      line-height: 25px;
+    }
+
+    .details {
+      border: 1px solid #D0D0D0;
+      border-radius: 4px;
+      margin: 1em 0px;
+      display: block;
+      width: 978px;
+    }
+
+    .summary {
+      padding: 8px 15px;
+      border-bottom: 1px solid #D0D0D0;
+      display: block;
+    }
+
+    .details pre {
+      margin: 5px;
+      border: none;
+    }
+
+    #container {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 1.5em;
+    }
+
+    .source * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .source {
+      border: 1px solid #D9D9D9;
+      background: #ECECEC;
+      width: 978px;
+    }
+
+    .source pre {
+      padding: 10px 0px;
+      border: none;
+    }
+
+    .source .data {
+      font-size: 80%;
+      overflow: auto;
+      background-color: #FFF;
+    }
+
+    .info {
+      padding: 0.5em;
+    }
+
+    .source .data .line_numbers {
+      background-color: #ECECEC;
+      color: #AAA;
+      padding: 1em .5em;
+      border-right: 1px solid #DDD;
+      text-align: right;
+    }
+
+    .line {
+      padding-left: 10px;
+    }
+
+    .line:hover {
+      background-color: #F6F6F6;
+    }
+
+    .line.active {
+      background-color: #FFCCCC;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    a { color: #980905; }
+    a:visited { color: #666; }
+    a.trace-frames { color: #666; }
+    a:hover { color: #C52F24; }
+    a.trace-frames.selected { color: #C52F24 }
+
+      #route_table {
+    margin: 0;
+    border-collapse: collapse;
+  }
+
+  #route_table thead tr {
+    border-bottom: 2px solid #ddd;
+  }
+
+  #route_table thead tr.bottom {
+    border-bottom: none;
+  }
+
+  #route_table thead tr.bottom th {
+    padding: 10px 0;
+    line-height: 15px;
+  }
+
+  #route_table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+
+  #route_table tbody tr:nth-child(odd) {
+    background: #f2f2f2;
+  }
+
+  #route_table tbody.exact_matches,
+  #route_table tbody.fuzzy_matches {
+    background-color: LightGoldenRodYellow;
+    border-bottom: solid 2px SlateGrey;
+  }
+
+  #route_table tbody.exact_matches tr,
+  #route_table tbody.fuzzy_matches tr {
+    background: none;
+    border-bottom: none;
+  }
+
+  #route_table td {
+    padding: 4px 30px;
+  }
+
+  #path_search {
+    width: 80%;
+    font-size: inherit;
+  }
+
+  </style>
+
+  <script>
+    var toggle = function(id) {
+      var s = document.getElementById(id).style;
+      s.display = s.display == 'none' ? 'block' : 'none';
+      return false;
+    }
+    var show = function(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+    var hide = function(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+    var toggleTrace = function() {
+      return toggle('blame_trace');
+    }
+    var toggleSessionDump = function() {
+      return toggle('session_dump');
+    }
+    var toggleEnvDump = function() {
+      return toggle('env_dump');
+    }
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>Routing Error</h1>
+</header>
+<div id="container">
+  <h2>undefined method `helper_method&#39; for JsonsHelper:Module</h2>
+
+  
+<p><code>Rails.root: /Users/Xeronic/Development/Rails/goaldigger_backend</code></p>
+
+<div id="traces">
+    <a href="#" onclick="hide(&#39;Framework-Trace&#39;);hide(&#39;Full-Trace&#39;);show(&#39;Application-Trace&#39;);; return false;">Application Trace</a> |
+    <a href="#" onclick="hide(&#39;Application-Trace&#39;);hide(&#39;Full-Trace&#39;);show(&#39;Framework-Trace&#39;);; return false;">Framework Trace</a> |
+    <a href="#" onclick="hide(&#39;Application-Trace&#39;);hide(&#39;Framework-Trace&#39;);show(&#39;Full-Trace&#39;);; return false;">Full Trace</a> 
+
+    <div id="Application-Trace" style="display: block;">
+      <pre><code><a class="trace-frames" data-frame-id="0" href="#">app/helpers/jsons_helper.rb:3:in `&lt;module:JsonsHelper&gt;&#39;</a><br><a class="trace-frames" data-frame-id="1" href="#">app/helpers/jsons_helper.rb:1:in `&lt;top (required)&gt;&#39;</a><br><a class="trace-frames" data-frame-id="15" href="#">app/controllers/application_controller.rb:1:in `&lt;top (required)&gt;&#39;</a><br><a class="trace-frames" data-frame-id="23" href="#">app/controllers/jsons_controller.rb:1:in `&lt;top (required)&gt;&#39;</a><br></code></pre>
+    </div>
+    <div id="Framework-Trace" style="display: none;">
+      <pre><code><a class="trace-frames" data-frame-id="2" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `load&#39;</a><br><a class="trace-frames" data-frame-id="3" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `block in load_file&#39;</a><br><a class="trace-frames" data-frame-id="4" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:647:in `new_constants_in&#39;</a><br><a class="trace-frames" data-frame-id="5" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:456:in `load_file&#39;</a><br><a class="trace-frames" data-frame-id="6" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:354:in `require_or_load&#39;</a><br><a class="trace-frames" data-frame-id="7" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:317:in `depend_on&#39;</a><br><a class="trace-frames" data-frame-id="8" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:233:in `require_dependency&#39;</a><br><a class="trace-frames" data-frame-id="9" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:149:in `block in modules_for_helpers&#39;</a><br><a class="trace-frames" data-frame-id="10" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:144:in `map!&#39;</a><br><a class="trace-frames" data-frame-id="11" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:144:in `modules_for_helpers&#39;</a><br><a class="trace-frames" data-frame-id="12" href="#">actionpack (4.2.0) lib/action_controller/metal/helpers.rb:93:in `modules_for_helpers&#39;</a><br><a class="trace-frames" data-frame-id="13" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:108:in `helper&#39;</a><br><a class="trace-frames" data-frame-id="14" href="#">actionpack (4.2.0) lib/action_controller/railties/helpers.rb:17:in `inherited&#39;</a><br><a class="trace-frames" data-frame-id="16" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `load&#39;</a><br><a class="trace-frames" data-frame-id="17" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `block in load_file&#39;</a><br><a class="trace-frames" data-frame-id="18" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:647:in `new_constants_in&#39;</a><br><a class="trace-frames" data-frame-id="19" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:456:in `load_file&#39;</a><br><a class="trace-frames" data-frame-id="20" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:354:in `require_or_load&#39;</a><br><a class="trace-frames" data-frame-id="21" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:494:in `load_missing_constant&#39;</a><br><a class="trace-frames" data-frame-id="22" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:184:in `const_missing&#39;</a><br><a class="trace-frames" data-frame-id="24" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `load&#39;</a><br><a class="trace-frames" data-frame-id="25" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `block in load_file&#39;</a><br><a class="trace-frames" data-frame-id="26" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:647:in `new_constants_in&#39;</a><br><a class="trace-frames" data-frame-id="27" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:456:in `load_file&#39;</a><br><a class="trace-frames" data-frame-id="28" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:354:in `require_or_load&#39;</a><br><a class="trace-frames" data-frame-id="29" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:494:in `load_missing_constant&#39;</a><br><a class="trace-frames" data-frame-id="30" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:184:in `const_missing&#39;</a><br><a class="trace-frames" data-frame-id="31" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get&#39;</a><br><a class="trace-frames" data-frame-id="32" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize&#39;</a><br><a class="trace-frames" data-frame-id="33" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each&#39;</a><br><a class="trace-frames" data-frame-id="34" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject&#39;</a><br><a class="trace-frames" data-frame-id="35" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize&#39;</a><br><a class="trace-frames" data-frame-id="36" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:566:in `get&#39;</a><br><a class="trace-frames" data-frame-id="37" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:597:in `constantize&#39;</a><br><a class="trace-frames" data-frame-id="38" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference&#39;</a><br><a class="trace-frames" data-frame-id="39" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller&#39;</a><br><a class="trace-frames" data-frame-id="40" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve&#39;</a><br><a class="trace-frames" data-frame-id="41" href="#">actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve&#39;</a><br><a class="trace-frames" data-frame-id="42" href="#">actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each&#39;</a><br><a class="trace-frames" data-frame-id="43" href="#">actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve&#39;</a><br><a class="trace-frames" data-frame-id="44" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call&#39;</a><br><a class="trace-frames" data-frame-id="45" href="#">rack (1.6.0) lib/rack/etag.rb:24:in `call&#39;</a><br><a class="trace-frames" data-frame-id="46" href="#">rack (1.6.0) lib/rack/conditionalget.rb:38:in `call&#39;</a><br><a class="trace-frames" data-frame-id="47" href="#">rack (1.6.0) lib/rack/head.rb:13:in `call&#39;</a><br><a class="trace-frames" data-frame-id="48" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call&#39;</a><br><a class="trace-frames" data-frame-id="49" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call&#39;</a><br><a class="trace-frames" data-frame-id="50" href="#">rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context&#39;</a><br><a class="trace-frames" data-frame-id="51" href="#">rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call&#39;</a><br><a class="trace-frames" data-frame-id="52" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call&#39;</a><br><a class="trace-frames" data-frame-id="53" href="#">activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call&#39;</a><br><a class="trace-frames" data-frame-id="54" href="#">activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call&#39;</a><br><a class="trace-frames" data-frame-id="55" href="#">activerecord (4.2.0) lib/active_record/migration.rb:378:in `call&#39;</a><br><a class="trace-frames" data-frame-id="56" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call&#39;</a><br><a class="trace-frames" data-frame-id="57" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call&#39;</a><br><a class="trace-frames" data-frame-id="58" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks&#39;</a><br><a class="trace-frames" data-frame-id="59" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks&#39;</a><br><a class="trace-frames" data-frame-id="60" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks&#39;</a><br><a class="trace-frames" data-frame-id="61" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call&#39;</a><br><a class="trace-frames" data-frame-id="62" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call&#39;</a><br><a class="trace-frames" data-frame-id="63" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call&#39;</a><br><a class="trace-frames" data-frame-id="64" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call&#39;</a><br><a class="trace-frames" data-frame-id="65" href="#">web-console (2.1.2) lib/web_console/middleware.rb:37:in `call&#39;</a><br><a class="trace-frames" data-frame-id="66" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call&#39;</a><br><a class="trace-frames" data-frame-id="67" href="#">railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app&#39;</a><br><a class="trace-frames" data-frame-id="68" href="#">railties (4.2.0) lib/rails/rack/logger.rb:20:in `block in call&#39;</a><br><a class="trace-frames" data-frame-id="69" href="#">activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `block in tagged&#39;</a><br><a class="trace-frames" data-frame-id="70" href="#">activesupport (4.2.0) lib/active_support/tagged_logging.rb:26:in `tagged&#39;</a><br><a class="trace-frames" data-frame-id="71" href="#">activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `tagged&#39;</a><br><a class="trace-frames" data-frame-id="72" href="#">railties (4.2.0) lib/rails/rack/logger.rb:20:in `call&#39;</a><br><a class="trace-frames" data-frame-id="73" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call&#39;</a><br><a class="trace-frames" data-frame-id="74" href="#">rack (1.6.0) lib/rack/methodoverride.rb:22:in `call&#39;</a><br><a class="trace-frames" data-frame-id="75" href="#">rack (1.6.0) lib/rack/runtime.rb:18:in `call&#39;</a><br><a class="trace-frames" data-frame-id="76" href="#">activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call&#39;</a><br><a class="trace-frames" data-frame-id="77" href="#">rack (1.6.0) lib/rack/lock.rb:17:in `call&#39;</a><br><a class="trace-frames" data-frame-id="78" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call&#39;</a><br><a class="trace-frames" data-frame-id="79" href="#">rack (1.6.0) lib/rack/sendfile.rb:113:in `call&#39;</a><br><a class="trace-frames" data-frame-id="80" href="#">railties (4.2.0) lib/rails/engine.rb:518:in `call&#39;</a><br><a class="trace-frames" data-frame-id="81" href="#">railties (4.2.0) lib/rails/application.rb:164:in `call&#39;</a><br><a class="trace-frames" data-frame-id="82" href="#">rack (1.6.0) lib/rack/lock.rb:17:in `call&#39;</a><br><a class="trace-frames" data-frame-id="83" href="#">rack (1.6.0) lib/rack/content_length.rb:15:in `call&#39;</a><br><a class="trace-frames" data-frame-id="84" href="#">rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service&#39;</a><br><a class="trace-frames" data-frame-id="85" href="#">/Users/Xeronic/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service&#39;</a><br><a class="trace-frames" data-frame-id="86" href="#">/Users/Xeronic/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run&#39;</a><br><a class="trace-frames" data-frame-id="87" href="#">/Users/Xeronic/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread&#39;</a><br></code></pre>
+    </div>
+    <div id="Full-Trace" style="display: none;">
+      <pre><code><a class="trace-frames" data-frame-id="0" href="#">app/helpers/jsons_helper.rb:3:in `&lt;module:JsonsHelper&gt;&#39;</a><br><a class="trace-frames" data-frame-id="1" href="#">app/helpers/jsons_helper.rb:1:in `&lt;top (required)&gt;&#39;</a><br><a class="trace-frames" data-frame-id="2" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `load&#39;</a><br><a class="trace-frames" data-frame-id="3" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `block in load_file&#39;</a><br><a class="trace-frames" data-frame-id="4" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:647:in `new_constants_in&#39;</a><br><a class="trace-frames" data-frame-id="5" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:456:in `load_file&#39;</a><br><a class="trace-frames" data-frame-id="6" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:354:in `require_or_load&#39;</a><br><a class="trace-frames" data-frame-id="7" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:317:in `depend_on&#39;</a><br><a class="trace-frames" data-frame-id="8" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:233:in `require_dependency&#39;</a><br><a class="trace-frames" data-frame-id="9" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:149:in `block in modules_for_helpers&#39;</a><br><a class="trace-frames" data-frame-id="10" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:144:in `map!&#39;</a><br><a class="trace-frames" data-frame-id="11" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:144:in `modules_for_helpers&#39;</a><br><a class="trace-frames" data-frame-id="12" href="#">actionpack (4.2.0) lib/action_controller/metal/helpers.rb:93:in `modules_for_helpers&#39;</a><br><a class="trace-frames" data-frame-id="13" href="#">actionpack (4.2.0) lib/abstract_controller/helpers.rb:108:in `helper&#39;</a><br><a class="trace-frames" data-frame-id="14" href="#">actionpack (4.2.0) lib/action_controller/railties/helpers.rb:17:in `inherited&#39;</a><br><a class="trace-frames" data-frame-id="15" href="#">app/controllers/application_controller.rb:1:in `&lt;top (required)&gt;&#39;</a><br><a class="trace-frames" data-frame-id="16" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `load&#39;</a><br><a class="trace-frames" data-frame-id="17" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `block in load_file&#39;</a><br><a class="trace-frames" data-frame-id="18" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:647:in `new_constants_in&#39;</a><br><a class="trace-frames" data-frame-id="19" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:456:in `load_file&#39;</a><br><a class="trace-frames" data-frame-id="20" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:354:in `require_or_load&#39;</a><br><a class="trace-frames" data-frame-id="21" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:494:in `load_missing_constant&#39;</a><br><a class="trace-frames" data-frame-id="22" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:184:in `const_missing&#39;</a><br><a class="trace-frames" data-frame-id="23" href="#">app/controllers/jsons_controller.rb:1:in `&lt;top (required)&gt;&#39;</a><br><a class="trace-frames" data-frame-id="24" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `load&#39;</a><br><a class="trace-frames" data-frame-id="25" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `block in load_file&#39;</a><br><a class="trace-frames" data-frame-id="26" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:647:in `new_constants_in&#39;</a><br><a class="trace-frames" data-frame-id="27" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:456:in `load_file&#39;</a><br><a class="trace-frames" data-frame-id="28" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:354:in `require_or_load&#39;</a><br><a class="trace-frames" data-frame-id="29" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:494:in `load_missing_constant&#39;</a><br><a class="trace-frames" data-frame-id="30" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:184:in `const_missing&#39;</a><br><a class="trace-frames" data-frame-id="31" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get&#39;</a><br><a class="trace-frames" data-frame-id="32" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize&#39;</a><br><a class="trace-frames" data-frame-id="33" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each&#39;</a><br><a class="trace-frames" data-frame-id="34" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject&#39;</a><br><a class="trace-frames" data-frame-id="35" href="#">activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize&#39;</a><br><a class="trace-frames" data-frame-id="36" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:566:in `get&#39;</a><br><a class="trace-frames" data-frame-id="37" href="#">activesupport (4.2.0) lib/active_support/dependencies.rb:597:in `constantize&#39;</a><br><a class="trace-frames" data-frame-id="38" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference&#39;</a><br><a class="trace-frames" data-frame-id="39" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller&#39;</a><br><a class="trace-frames" data-frame-id="40" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve&#39;</a><br><a class="trace-frames" data-frame-id="41" href="#">actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve&#39;</a><br><a class="trace-frames" data-frame-id="42" href="#">actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each&#39;</a><br><a class="trace-frames" data-frame-id="43" href="#">actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve&#39;</a><br><a class="trace-frames" data-frame-id="44" href="#">actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call&#39;</a><br><a class="trace-frames" data-frame-id="45" href="#">rack (1.6.0) lib/rack/etag.rb:24:in `call&#39;</a><br><a class="trace-frames" data-frame-id="46" href="#">rack (1.6.0) lib/rack/conditionalget.rb:38:in `call&#39;</a><br><a class="trace-frames" data-frame-id="47" href="#">rack (1.6.0) lib/rack/head.rb:13:in `call&#39;</a><br><a class="trace-frames" data-frame-id="48" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call&#39;</a><br><a class="trace-frames" data-frame-id="49" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call&#39;</a><br><a class="trace-frames" data-frame-id="50" href="#">rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context&#39;</a><br><a class="trace-frames" data-frame-id="51" href="#">rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call&#39;</a><br><a class="trace-frames" data-frame-id="52" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call&#39;</a><br><a class="trace-frames" data-frame-id="53" href="#">activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call&#39;</a><br><a class="trace-frames" data-frame-id="54" href="#">activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call&#39;</a><br><a class="trace-frames" data-frame-id="55" href="#">activerecord (4.2.0) lib/active_record/migration.rb:378:in `call&#39;</a><br><a class="trace-frames" data-frame-id="56" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call&#39;</a><br><a class="trace-frames" data-frame-id="57" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call&#39;</a><br><a class="trace-frames" data-frame-id="58" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks&#39;</a><br><a class="trace-frames" data-frame-id="59" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks&#39;</a><br><a class="trace-frames" data-frame-id="60" href="#">activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks&#39;</a><br><a class="trace-frames" data-frame-id="61" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call&#39;</a><br><a class="trace-frames" data-frame-id="62" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call&#39;</a><br><a class="trace-frames" data-frame-id="63" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call&#39;</a><br><a class="trace-frames" data-frame-id="64" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call&#39;</a><br><a class="trace-frames" data-frame-id="65" href="#">web-console (2.1.2) lib/web_console/middleware.rb:37:in `call&#39;</a><br><a class="trace-frames" data-frame-id="66" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call&#39;</a><br><a class="trace-frames" data-frame-id="67" href="#">railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app&#39;</a><br><a class="trace-frames" data-frame-id="68" href="#">railties (4.2.0) lib/rails/rack/logger.rb:20:in `block in call&#39;</a><br><a class="trace-frames" data-frame-id="69" href="#">activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `block in tagged&#39;</a><br><a class="trace-frames" data-frame-id="70" href="#">activesupport (4.2.0) lib/active_support/tagged_logging.rb:26:in `tagged&#39;</a><br><a class="trace-frames" data-frame-id="71" href="#">activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `tagged&#39;</a><br><a class="trace-frames" data-frame-id="72" href="#">railties (4.2.0) lib/rails/rack/logger.rb:20:in `call&#39;</a><br><a class="trace-frames" data-frame-id="73" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call&#39;</a><br><a class="trace-frames" data-frame-id="74" href="#">rack (1.6.0) lib/rack/methodoverride.rb:22:in `call&#39;</a><br><a class="trace-frames" data-frame-id="75" href="#">rack (1.6.0) lib/rack/runtime.rb:18:in `call&#39;</a><br><a class="trace-frames" data-frame-id="76" href="#">activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call&#39;</a><br><a class="trace-frames" data-frame-id="77" href="#">rack (1.6.0) lib/rack/lock.rb:17:in `call&#39;</a><br><a class="trace-frames" data-frame-id="78" href="#">actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call&#39;</a><br><a class="trace-frames" data-frame-id="79" href="#">rack (1.6.0) lib/rack/sendfile.rb:113:in `call&#39;</a><br><a class="trace-frames" data-frame-id="80" href="#">railties (4.2.0) lib/rails/engine.rb:518:in `call&#39;</a><br><a class="trace-frames" data-frame-id="81" href="#">railties (4.2.0) lib/rails/application.rb:164:in `call&#39;</a><br><a class="trace-frames" data-frame-id="82" href="#">rack (1.6.0) lib/rack/lock.rb:17:in `call&#39;</a><br><a class="trace-frames" data-frame-id="83" href="#">rack (1.6.0) lib/rack/content_length.rb:15:in `call&#39;</a><br><a class="trace-frames" data-frame-id="84" href="#">rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service&#39;</a><br><a class="trace-frames" data-frame-id="85" href="#">/Users/Xeronic/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service&#39;</a><br><a class="trace-frames" data-frame-id="86" href="#">/Users/Xeronic/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run&#39;</a><br><a class="trace-frames" data-frame-id="87" href="#">/Users/Xeronic/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread&#39;</a><br></code></pre>
+    </div>
+
+  <script type="text/javascript">
+    var traceFrames = document.getElementsByClassName('trace-frames');
+    var selectedFrame, currentSource = document.getElementById('frame-source-0');
+
+    // Add click listeners for all stack frames
+    for (var i = 0; i < traceFrames.length; i++) {
+      traceFrames[i].addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = e.target;
+        var frame_id = target.dataset.frameId;
+
+        if (selectedFrame) {
+          selectedFrame.className = selectedFrame.className.replace("selected", "");
+        }
+
+        target.className += " selected";
+        selectedFrame = target;
+
+        // Change the extracted source code
+        changeSourceExtract(frame_id);
+      });
+
+      function changeSourceExtract(frame_id) {
+        var el = document.getElementById('frame-source-' + frame_id);
+        if (currentSource && el) {
+          currentSource.className += " hidden";
+          el.className = el.className.replace(" hidden", "");
+          currentSource = el;
+        }
+      }
+    }
+  </script>
+</div>
+
+
+    <h2>
+      Routes
+    </h2>
+
+    <p>
+      Routes match in priority from top to bottom
+    </p>
+
+    
+<table id='route_table' class='route_table'>
+  <thead>
+    <tr>
+      <th>Helper</th>
+      <th>HTTP Verb</th>
+      <th>Path</th>
+      <th>Controller#Action</th>
+    </tr>
+    <tr class='bottom'>
+      <th>
+        <a data-route-helper="_path" title="Returns a relative path (without the http or domain)" href="#">Path</a> /
+        <a data-route-helper="_url" title="Returns an absolute url (with the http and domain)" href="#">Url</a>
+      </th>
+      <th>
+      </th>
+      <th>
+        <input id="search" placeholder="Path Match" type="search" name="path[]" />
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody class='exact_matches' id='exact_matches'>
+  </tbody>
+  <tbody class='fuzzy_matches' id='fuzzy_matches'>
+  </tbody>
+  <tbody>
+    <tr class='route_row' data-helper='path'>
+  <td data-route-name='jsons_hello'>
+      jsons_hello<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/jsons/hello(.:format)' data-regexp='^\/jsons\/hello(?:\.([^\/.?]+))?$'>
+    /jsons/hello(.:format)
+  </td>
+  <td data-route-reqs='jsons#hello'>
+    jsons#hello
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='sessions_new'>
+      sessions_new<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/sessions/new(.:format)' data-regexp='^\/sessions\/new(?:\.([^\/.?]+))?$'>
+    /sessions/new(.:format)
+  </td>
+  <td data-route-reqs='sessions#new'>
+    sessions#new
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='sessions_destroy'>
+      sessions_destroy<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/sessions/destroy(.:format)' data-regexp='^\/sessions\/destroy(?:\.([^\/.?]+))?$'>
+    /sessions/destroy(.:format)
+  </td>
+  <td data-route-reqs='sessions#destroy'>
+    sessions#destroy
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='users_new'>
+      users_new<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/users/new(.:format)' data-regexp='^\/users\/new(?:\.([^\/.?]+))?$'>
+    /users/new(.:format)
+  </td>
+  <td data-route-reqs='users#new'>
+    users#new
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='users_index'>
+      users_index<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/users/index(.:format)' data-regexp='^\/users\/index(?:\.([^\/.?]+))?$'>
+    /users/index(.:format)
+  </td>
+  <td data-route-reqs='users#index'>
+    users#index
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='users'>
+      users<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/users(.:format)' data-regexp='^\/users(?:\.([^\/.?]+))?$'>
+    /users(.:format)
+  </td>
+  <td data-route-reqs='users#index'>
+    users#index
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name=''>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/users(.:format)' data-regexp='^\/users(?:\.([^\/.?]+))?$'>
+    /users(.:format)
+  </td>
+  <td data-route-reqs='users#create'>
+    users#create
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='new_user'>
+      new_user<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/users/new(.:format)' data-regexp='^\/users\/new(?:\.([^\/.?]+))?$'>
+    /users/new(.:format)
+  </td>
+  <td data-route-reqs='users#new'>
+    users#new
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='edit_user'>
+      edit_user<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/users/:id/edit(.:format)' data-regexp='^\/users\/([^\/.?]+)\/edit(?:\.([^\/.?]+))?$'>
+    /users/:id/edit(.:format)
+  </td>
+  <td data-route-reqs='users#edit'>
+    users#edit
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='user'>
+      user<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/users/:id(.:format)' data-regexp='^\/users\/([^\/.?]+)(?:\.([^\/.?]+))?$'>
+    /users/:id(.:format)
+  </td>
+  <td data-route-reqs='users#show'>
+    users#show
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name=''>
+  </td>
+  <td data-route-verb='PATCH'>
+    PATCH
+  </td>
+  <td data-route-path='/users/:id(.:format)' data-regexp='^\/users\/([^\/.?]+)(?:\.([^\/.?]+))?$'>
+    /users/:id(.:format)
+  </td>
+  <td data-route-reqs='users#update'>
+    users#update
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name=''>
+  </td>
+  <td data-route-verb='PUT'>
+    PUT
+  </td>
+  <td data-route-path='/users/:id(.:format)' data-regexp='^\/users\/([^\/.?]+)(?:\.([^\/.?]+))?$'>
+    /users/:id(.:format)
+  </td>
+  <td data-route-reqs='users#update'>
+    users#update
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name=''>
+  </td>
+  <td data-route-verb='DELETE'>
+    DELETE
+  </td>
+  <td data-route-path='/users/:id(.:format)' data-regexp='^\/users\/([^\/.?]+)(?:\.([^\/.?]+))?$'>
+    /users/:id(.:format)
+  </td>
+  <td data-route-reqs='users#destroy'>
+    users#destroy
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='login'>
+      login<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/login(.:format)' data-regexp='^\/api\/v1\/login(?:\.([^\/.?]+))?$'>
+    /api/v1/login(.:format)
+  </td>
+  <td data-route-reqs='jsons#login'>
+    jsons#login
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='projects'>
+      projects<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/projects(.:format)' data-regexp='^\/api\/v1\/projects(?:\.([^\/.?]+))?$'>
+    /api/v1/projects(.:format)
+  </td>
+  <td data-route-reqs='jsons#projects'>
+    jsons#projects
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='signup'>
+      signup<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/signup(.:format)' data-regexp='^\/api\/v1\/signup(?:\.([^\/.?]+))?$'>
+    /api/v1/signup(.:format)
+  </td>
+  <td data-route-reqs='jsons#signup'>
+    jsons#signup
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='add_project'>
+      add_project<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/add_project(.:format)' data-regexp='^\/api\/v1\/add_project(?:\.([^\/.?]+))?$'>
+    /api/v1/add_project(.:format)
+  </td>
+  <td data-route-reqs='jsons#add_project'>
+    jsons#add_project
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='delete_project'>
+      delete_project<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/delete_project(.:format)' data-regexp='^\/api\/v1\/delete_project(?:\.([^\/.?]+))?$'>
+    /api/v1/delete_project(.:format)
+  </td>
+  <td data-route-reqs='jsons#delete_project'>
+    jsons#delete_project
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='toggle_item'>
+      toggle_item<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/toggle_item(.:format)' data-regexp='^\/api\/v1\/toggle_item(?:\.([^\/.?]+))?$'>
+    /api/v1/toggle_item(.:format)
+  </td>
+  <td data-route-reqs='jsons#toggle_item'>
+    jsons#toggle_item
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='add_item'>
+      add_item<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/add_item(.:format)' data-regexp='^\/api\/v1\/add_item(?:\.([^\/.?]+))?$'>
+    /api/v1/add_item(.:format)
+  </td>
+  <td data-route-reqs='jsons#add_item'>
+    jsons#add_item
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='delete_item'>
+      delete_item<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/delete_item(.:format)' data-regexp='^\/api\/v1\/delete_item(?:\.([^\/.?]+))?$'>
+    /api/v1/delete_item(.:format)
+  </td>
+  <td data-route-reqs='jsons#delete_item'>
+    jsons#delete_item
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='add_milestone'>
+      add_milestone<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/add_milestone(.:format)' data-regexp='^\/api\/v1\/add_milestone(?:\.([^\/.?]+))?$'>
+    /api/v1/add_milestone(.:format)
+  </td>
+  <td data-route-reqs='jsons#add_milestone'>
+    jsons#add_milestone
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='delete_milestone'>
+      delete_milestone<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/delete_milestone(.:format)' data-regexp='^\/api\/v1\/delete_milestone(?:\.([^\/.?]+))?$'>
+    /api/v1/delete_milestone(.:format)
+  </td>
+  <td data-route-reqs='jsons#delete_milestone'>
+    jsons#delete_milestone
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='reset_password'>
+      reset_password<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/reset_password(.:format)' data-regexp='^\/api\/v1\/reset_password(?:\.([^\/.?]+))?$'>
+    /api/v1/reset_password(.:format)
+  </td>
+  <td data-route-reqs='jsons#reset_password'>
+    jsons#reset_password
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='change_password'>
+      change_password<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='POST'>
+    POST
+  </td>
+  <td data-route-path='/api/v1/change_password(.:format)' data-regexp='^\/api\/v1\/change_password(?:\.([^\/.?]+))?$'>
+    /api/v1/change_password(.:format)
+  </td>
+  <td data-route-reqs='jsons#change_password'>
+    jsons#change_password
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name=''>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/api/v1/signup(.:format)' data-regexp='^\/api\/v1\/signup(?:\.([^\/.?]+))?$'>
+    /api/v1/signup(.:format)
+  </td>
+  <td data-route-reqs='jsons#signup'>
+    jsons#signup
+  </td>
+</tr>
+<tr class='route_row' data-helper='path'>
+  <td data-route-name='root'>
+      root<span class='helper'>_path</span>
+  </td>
+  <td data-route-verb='GET'>
+    GET
+  </td>
+  <td data-route-path='/' data-regexp='^\/$'>
+    /
+  </td>
+  <td data-route-reqs='sessions#new'>
+    sessions#new
+  </td>
+</tr>
+
+  </tbody>
+</table>
+
+<script type='text/javascript'>
+  // Iterates each element through a function
+  function each(elems, func) {
+    if (!elems instanceof Array) { elems = [elems]; }
+    for (var i = 0, len = elems.length; i < len; i++) {
+      func(elems[i]);
+    }
+  }
+
+  // Sets innerHTML for an element
+  function setContent(elem, text) {
+    elem.innerHTML = text;
+  }
+
+  // Enables path search functionality
+  function setupMatchPaths() {
+    // Check if the user input (sanitized as a path) matches the regexp data attribute
+    function checkExactMatch(section, elem, value) {
+      var string = sanitizePath(value),
+          regexp = elem.getAttribute("data-regexp");
+
+      showMatch(string, regexp, section, elem);
+    }
+
+    // Check if the route path data attribute contains the user input
+    function checkFuzzyMatch(section, elem, value) {
+      var string = elem.getAttribute("data-route-path"),
+          regexp = value;
+
+      showMatch(string, regexp, section, elem);
+    }
+
+    // Display the parent <tr> element in the appropriate section when there's a match
+    function showMatch(string, regexp, section, elem) {
+      if(string.match(RegExp(regexp))) {
+        section.appendChild(elem.parentNode.cloneNode(true));
+      }
+    }
+
+    // Check if there are any matched results in a section
+    function checkNoMatch(section, defaultText, noMatchText) {
+      if (section.innerHTML === defaultText) {
+        setContent(section, defaultText + noMatchText);
+      }
+    }
+
+    // Ensure path always starts with a slash "/" and remove params or fragments
+    function sanitizePath(path) {
+      var path = path.charAt(0) == '/' ? path : "/" + path;
+      return path.replace(/\#.*|\?.*/, '');
+    }
+
+    var regexpElems     = document.querySelectorAll('#route_table [data-regexp]'),
+        searchElem      = document.querySelector('#search'),
+        exactMatches    = document.querySelector('#exact_matches'),
+        fuzzyMatches    = document.querySelector('#fuzzy_matches');
+
+    // Remove matches when no search value is present
+    searchElem.onblur = function(e) {
+      if (searchElem.value === "") {
+        setContent(exactMatches, "");
+        setContent(fuzzyMatches, "");
+      }
+    }
+
+    // On key press perform a search for matching paths
+    searchElem.onkeyup = function(e){
+      var userInput         = searchElem.value,
+          defaultExactMatch = '<tr><th colspan="4">Paths Matching (' + escape(sanitizePath(userInput)) +'):</th></tr>',
+          defaultFuzzyMatch = '<tr><th colspan="4">Paths Containing (' + escape(userInput) +'):</th></tr>',
+          noExactMatch      = '<tr><th colspan="4">No Exact Matches Found</th></tr>',
+          noFuzzyMatch      = '<tr><th colspan="4">No Fuzzy Matches Found</th></tr>';
+
+      // Clear out results section
+      setContent(exactMatches, defaultExactMatch);
+      setContent(fuzzyMatches, defaultFuzzyMatch);
+
+      // Display exact matches and fuzzy matches
+      each(regexpElems, function(elem) {
+        checkExactMatch(exactMatches, elem, userInput);
+        checkFuzzyMatch(fuzzyMatches, elem, userInput);
+      })
+
+      // Display 'No Matches' message when no matches are found
+      checkNoMatch(exactMatches, defaultExactMatch, noExactMatch);
+      checkNoMatch(fuzzyMatches, defaultFuzzyMatch, noFuzzyMatch);
+    }
+  }
+
+  // Enables functionality to toggle between `_path` and `_url` helper suffixes
+  function setupRouteToggleHelperLinks() {
+
+    // Sets content for each element
+    function setValOn(elems, val) {
+      each(elems, function(elem) {
+        setContent(elem, val);
+      });
+    }
+
+    // Sets onClick event for each element
+    function onClick(elems, func) {
+      each(elems, function(elem) {
+        elem.onclick = func;
+      });
+    }
+
+    var toggleLinks = document.querySelectorAll('#route_table [data-route-helper]');
+    onClick(toggleLinks, function(){
+      var helperTxt   = this.getAttribute("data-route-helper"),
+          helperElems = document.querySelectorAll('[data-route-name] span.helper');
+
+      setValOn(helperElems, helperTxt);
+    });
+  }
+
+  setupMatchPaths();
+  setupRouteToggleHelperLinks();
+</script>
+
+
+  
+
+<h2 style="margin-top: 30px">Request</h2>
+<p><b>Parameters</b>:</p> <pre>{&quot;email&quot;=&gt;&quot;j&quot;,
+ &quot;password&quot;=&gt;&quot;[FILTERED]&quot;,
+ &quot;format&quot;=&gt;&quot;json&quot;}</pre>
+
+<div class="details">
+  <div class="summary"><a href="#" onclick="return toggleSessionDump()">Toggle session dump</a></div>
+  <div id="session_dump" style="display:none"><pre></pre></div>
+</div>
+
+<div class="details">
+  <div class="summary"><a href="#" onclick="return toggleEnvDump()">Toggle env dump</a></div>
+  <div id="env_dump" style="display:none"><pre>GATEWAY_INTERFACE: &quot;CGI/1.1&quot;
+HTTP_ACCEPT: &quot;application/json&quot;
+REMOTE_ADDR: &quot;127.0.0.1&quot;
+REMOTE_HOST: &quot;127.0.0.1&quot;
+SERVER_NAME: &quot;localhost&quot;
+SERVER_PROTOCOL: &quot;HTTP/1.1&quot;</pre></div>
+</div>
+
+<h2 style="margin-top: 30px">Response</h2>
+<p><b>Headers</b>:</p> <pre>None</pre>
+
+</div>
+
+
+</body>
+</html>
