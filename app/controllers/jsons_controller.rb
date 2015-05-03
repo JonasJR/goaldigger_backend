@@ -111,9 +111,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: milestone.errors.full_messages }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end 
+    render text: response.to_json
   end
 
   def delete_milestone
