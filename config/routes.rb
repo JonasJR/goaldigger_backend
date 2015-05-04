@@ -1,20 +1,17 @@
 Rails.application.routes.draw do
-  get 'friends/search_friends'
-
-  get 'jsons/hello'
 
   get 'sessions/new'
   get 'sessions/destroy'
   get 'users/new'
   get 'users/index'
 
-  #get 'signup'    => 'users#new'
-  #get 'login'     => 'sessions#new'
-  #post 'login'    => 'sessions#create'
-  #get 'logout'    => 'sessions#destroy'
+  get 'signup'    => 'users#new'
+  get 'login'     => 'sessions#new'
+  post 'login'    => 'sessions#create'
+  get 'logout'    => 'sessions#destroy'
 
-  resources :users
-
+  resources :projects, only: [:index, :new, :show]
+  resources :users, only: [:new, :create, :show]
   scope 'api' do
     scope 'v1' do
       post '/login'             => 'jsons#login'
