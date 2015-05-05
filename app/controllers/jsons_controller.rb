@@ -48,8 +48,8 @@ class JsonsController < ApplicationController
   def add_project
     project_name = { name: params[:project_name] }
     
-    if @user.projects.create(project_name)
-      response = { success: true }
+    if project = @user.projects.create(project_name)
+      response = { success: true, project_id: project.id, project_name: project.name, project_description: project.description }
     else
       response = { success: false, message: @user.projects.errors.full_messages }
     end
