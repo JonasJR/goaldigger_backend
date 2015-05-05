@@ -47,7 +47,7 @@ class JsonsController < ApplicationController
 
   def add_project
     project_name = { name: params[:project_name] }
-    
+
     if project = @user.projects.create(project_name)
       response = { success: true, project_id: project.id, project_name: project.name, project_description: project.description }
     else
@@ -56,7 +56,7 @@ class JsonsController < ApplicationController
 
     respond_to do |format|
       format.json { render text: response.to_json }
-    end 
+    end
   end
 
   def delete_project
@@ -67,7 +67,7 @@ class JsonsController < ApplicationController
     end
     respond_to do |format|
       format.json { render text: response.to_json }
-    end 
+    end
   end
 
   def projects
@@ -124,7 +124,7 @@ class JsonsController < ApplicationController
 
     respond_to do |format|
       format.json { render text: response.to_json }
-    end 
+    end
   end
 
   def reset_password
@@ -134,7 +134,7 @@ class JsonsController < ApplicationController
 
     user.password = new_pass
     user.password_confirmation = new_pass
-    
+
 
     if user.save
       UserMailer.send_recovery_password(email, new_pass).deliver_now
@@ -177,9 +177,7 @@ class JsonsController < ApplicationController
       if user && user.authenticate(params[:password])
         @user = user
       else
-        respond_to do |format|
-          format.json { render text: "Please log in first".to_json }
-        end
+        render text: "Please log in first".to_json
       end
     end
 

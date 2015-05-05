@@ -30,4 +30,23 @@ module ApplicationHelper
       return "#{title} | #{base_title}"
     end
   end
+
+  def project_percentage_done(project)
+    items = 0
+    items_done = 0
+
+    project.milestones.each do |milestone|
+      milestone.items.each do |item|
+        items += 1
+        items_done += 1 if item.done
+      end
+    end
+
+    if items > 0
+      percent = items.to_f / items_done
+      "#{percent}%"
+    else
+      "0%"
+    end
+  end
 end

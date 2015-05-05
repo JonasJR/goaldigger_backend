@@ -1,2 +1,17 @@
-<h1>Projects#show</h1>
-<p>Find me in app/views/projects/show.html.erb</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Milestones</h1><%= link_to '+Project', new_user_project_milestone_path(@user, @project, @milestone), class: 'btn btn-primary' %>
+    <% if @milestones.any? %>
+      <ul class="list-group">
+      <% @milestones.each do |milestone| %>
+        <li class="list-group-item">
+          <%= milestone.name %>
+          <span class="pull-right">25%</span>
+        </li>
+      <% end %>
+      </ul>
+    <% else %>
+      <p class="text-center">No milestone(s) added yet</p>
+    <% end %>
+  </div>
+</div>
