@@ -12,11 +12,9 @@ class JsonsController < ApplicationController
     user = User.find_by(email: email)
 
     if (user && user.authenticate(password))
-      render text: {name: user.name, email: email, success: true},
-             status: :success
+      render text: {name: user.name, email: email, success: true}.to_json
     else
-      render text: {message: "Invalid username or password", success: false},
-             status: :error
+      render text: {message: "Invalid username or password", success: false}.to_json
     end
   end
 
