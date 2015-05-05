@@ -12,12 +12,12 @@ class JsonsController < ApplicationController
     user = User.find_by(email: email)
 
     if (user && user.authenticate(password))
-      response = {name: user.name, email: email, success: true}
+      render text: {name: user.name, email: email, success: true},
+             status: :success
     else
-      response = {message: "Invalid username or password", success: false}
+      render text: {message: "Invalid username or password", success: false},
+             status: :error
     end
-
-    render text: response.to_json 
   end
 
   def signup
@@ -77,19 +77,15 @@ class JsonsController < ApplicationController
   end
 
   def add_item
-    item_hash = { name: params[:item_name], project_id: params[:project_id], 
-                  milestone_id: params[:milestone_id], user_id: @user.id }
+    item_hash = { name: params[:item_name], milestone_id: params[:milestone_id], user_id: @user.id }
     item = Item.new(item_hash)
 
     if item.save
-      response = { success: true }
+      response = { success: true, item_name: item.name, item_id: item.id }
     else
       response = { success: false, message: item.errors.full_messages }
     end
-
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end 
+    render text: response.to_json
   end
 
   def delete_item
@@ -101,9 +97,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: item.errors.full_messages }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end 
+    render text: response.to_json
   end
 
   def add_milestone
@@ -117,9 +111,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: milestone.errors.full_messages }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end 
+    render text: response.to_json
   end
 
   def delete_milestone

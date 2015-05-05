@@ -1,0 +1,8 @@
+<h1>Your projects</h1>
+<ul>
+<% if !@projects.nil? %>
+  <% @projects.each do |project| %>
+    <li><%= link_to project.name, project_path(project) %></li>
+  <% end %>
+<% end %>
+</ul>

@@ -21,4 +21,13 @@ module ApplicationHelper
     end
     projectList
   end
+
+  def full_title(title = "")
+    base_title = "Goaldigger"
+    if title.blank?
+      return base_title
+    else
+      return "#{title} | #{base_title}"
+    end
+  end
 end
