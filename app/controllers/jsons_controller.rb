@@ -104,7 +104,7 @@ class JsonsController < ApplicationController
     milestone = @user.projects.find(project_id).milestones.new(milestone_hash)
 
     if milestone.save
-      response = { success: true }
+      response = { success: true, milestone_id: milestone.id, milestone_name: milestone.name }
     else
       response = { success: false, message: milestone.errors.full_messages }
     end
