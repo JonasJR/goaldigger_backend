@@ -19,15 +19,18 @@ Rails.application.routes.draw do
       post '/add_project'       => 'jsons#add_project'
       post '/delete_project'    => 'jsons#delete_project'
       post '/toggle_item'       => 'jsons#toggle_item'
-      post '/create_item'          => 'jsons#add_item'
+      post '/create_item'       => 'jsons#add_item'
       post '/delete_item'       => 'jsons#delete_item'
-      post '/create_milestone'     => 'jsons#add_milestone'
+      post '/create_milestone'  => 'jsons#add_milestone'
       post '/delete_milestone'  => 'jsons#delete_milestone'
       post '/reset_password'    => 'jsons#reset_password'
       post '/change_password'   => 'jsons#change_password'
-      post '/search_friends'    => 'friends#search_friends'
+      post '/search_friends'    => 'friends#search'
+      post '/show_friends'      => 'friends#index'
+      post '/create_friend'     => 'friends#create'
+      post '/destroy_friend'    => 'friends#destroy'
 
-      get '/signup'            => 'jsons#signup'
+      get '/signup'             => 'jsons#signup'
     end
   end
 
