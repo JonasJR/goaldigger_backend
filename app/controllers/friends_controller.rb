@@ -25,7 +25,7 @@ class FriendsController < ApplicationController
 
     return_list = []
     users.each do |friend|
-      return_list << friend unless @user.friends.include? friend
+      return_list << friend unless (@user.friends.include? friend) or friend == @user
     end
 
     render text: return_list.to_json
