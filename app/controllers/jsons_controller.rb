@@ -60,7 +60,7 @@ class JsonsController < ApplicationController
   end
 
   def delete_project
-    if @user.projects.delete(params[:id])
+    if @user.projects.destroy(params[:id])
       response = { success: true }
     else
       response = { success: false, message: "Project not found" }
@@ -89,7 +89,7 @@ class JsonsController < ApplicationController
   def delete_item
     item = Item.find(params[:item_id])
 
-    if item.user_id == @user.id && item.delete
+    if item.user_id == @user.id && item.destroy
       response = { success: true }
     else
       response = { success: false, message: item.errors.full_messages }
@@ -116,7 +116,7 @@ class JsonsController < ApplicationController
     milestone_id = params[:milestone_id]
     project_id = params[:project_id]
 
-    if @user.projects.find(project_id).milestones.find(milestone_id).delete
+    if @user.projects.find(project_id).milestones.find(milestone_id).destroy
       response = { success: true }
     else
       response = { success: false, message: milestone.errors.full_messages }
