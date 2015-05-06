@@ -1,8 +1,17 @@
-<h1>Your projects</h1>
-<ul>
-<% if !@projects.nil? %>
-  <% @projects.each do |project| %>
-    <li><%= link_to project.name, project_path(project) %></li>
-  <% end %>
-<% end %>
-</ul>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Your projects</h1><%= link_to '+Project', new_user_project_path, class: 'btn btn-primary' %>
+    <% if @projects.any? %>
+      <ul class="list-group">
+      <% @projects.each do |project| %>
+        <li class="list-group-item">
+          <%= link_to project.name, user_project_path(@user, project) %>
+          <span class="pull-right"><%= project_percentage_done(project) %></span>
+        </li>
+      <% end %>
+      </ul>
+    <% else %>
+      <p class="text-center">No project(s) added yet</p>
+    <% end %>
+  </div>
+</div>

@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-  get 'sessions/destroy'
-  get 'users/new'
-  get 'users/index'
+  resources :users do
+    resources :projects, only: [:index, :new, :show, :create] do
+      resources :milestones, only: [:index, :new, :create]
+    end
+  end
 
   get 'signup'    => 'users#new'
   get 'login'     => 'sessions#new'
-  post 'login'    => 'sessions#create'
   get 'logout'    => 'sessions#destroy'
+  post 'login'    => 'sessions#create'
 
-  resources :projects, only: [:index, :new, :show]
-  resources :users, only: [:new, :create, :show]
   scope 'api' do
     scope 'v1' do
       post '/login'             => 'jsons#login'
