@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
 
   def create
     friend = User.find_by(email: params[:friend_email])
-    @friendship = @user.friendship.build(:friend_id => friend.id)
+    @friendship = @user.friendships.build(:friend_id => friend.id)
 
     if @friendship.save
       response = { success: true, message: "Friend #{friend.name} added" }
