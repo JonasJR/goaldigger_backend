@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, through: :friendships
 
+  has_many :collaborations
+  has_many :shared_projects, through: :collaborations, source: :project
+
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :password, presence: true, length: { minimum: 6, maximum: 255 }
