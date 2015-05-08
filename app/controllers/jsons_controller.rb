@@ -165,6 +165,18 @@ class JsonsController < ApplicationController
     end
   end
 
+  def share_project
+    project = Project.find(params[:project_id])
+    share_friends = params[:share_friends].split(':')
+
+    share_friends.each do |friend|
+      project.participants << User.find(friend)
+    end
+
+    render text: "Project got shared".to_json
+
+  end
+
   private
 
     def user_params
