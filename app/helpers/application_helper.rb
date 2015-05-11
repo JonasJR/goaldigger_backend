@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def render_projects(user)
-    projects = user.projects.all + user.shared_projects
+    projects = user.projects.all + user.shared_projects.distinct
 
     projectList = []
     projects.each do |project|
@@ -17,7 +17,7 @@ module ApplicationHelper
         milestoneList << { id: milestone.id, name: milestone.name, items: itemList }
 
       end
-      participants = User.where(id: project.participants).to_a
+      participants = User.select(:id, :email).where(id: project.participants).to_a
       projectList << { id: project.id, name: project.name, owner: project.user.email, participants: participants, description: project.description, milestones: milestoneList }
     end
     projectList
