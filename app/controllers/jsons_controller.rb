@@ -38,6 +38,7 @@ class JsonsController < ApplicationController
     item = Item.find(params[:item_id])
 
     item.done = !item.done
+    item.done_by = @user.email
     item.save
 
     respond_to do |format|

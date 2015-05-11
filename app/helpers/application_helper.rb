@@ -11,7 +11,7 @@ module ApplicationHelper
         itemList = []
 
         milestone.items.all.each do |item|
-          itemList << { id: item.id, name: item.name, done: item.done }
+          itemList << { id: item.id, name: item.name, done: item.done, done_by: item.done_by }
         end
 
         milestoneList << { id: milestone.id, name: milestone.name, items: itemList }
