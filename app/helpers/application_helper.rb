@@ -17,7 +17,8 @@ module ApplicationHelper
         milestoneList << { id: milestone.id, name: milestone.name, items: itemList }
 
       end
-      projectList << { id: project.id, name: project.name, description: project.description, milestones: milestoneList }
+      participants = User.where(id: project.participants).to_a
+      projectList << { id: project.id, name: project.name, owner: project.user.email, participants: participants, description: project.description, milestones: milestoneList }
     end
     projectList
   end

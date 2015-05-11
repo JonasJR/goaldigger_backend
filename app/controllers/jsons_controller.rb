@@ -41,9 +41,7 @@ class JsonsController < ApplicationController
     item.done_by = @user.email
     item.save
 
-    respond_to do |format|
-      format.json { render text: "Done: #{item.done}".to_json }
-    end
+    render text: "Done: #{item.done}".to_json
   end
 
   def add_project
