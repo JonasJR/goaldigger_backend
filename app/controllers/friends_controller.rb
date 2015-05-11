@@ -16,7 +16,8 @@ class FriendsController < ApplicationController
   end
 
   def index
-    render text: @user.friends.to_json
+    response = { id: @user.id, name: @user.name, email: @user.email }
+    render text: response.to_json
   end
 
   def search
