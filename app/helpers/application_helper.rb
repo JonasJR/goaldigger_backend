@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def render_projects(user)
-    projects = user.projects.all + user.shared_projects.distinct
+    projects = user.projects.all + user.shared_projects
 
     projectList = []
     projects.each do |project|

@@ -168,9 +168,17 @@ class JsonsController < ApplicationController
     project = Project.find(params[:project_id])
     share_friends = params[:share_friends].split(':')
 
-    share_friends.each do |friend|
-      project.participants << User.find(friend)
+    new_participants = share_friends.map { |friend| User.find(friend) }
+    participants = project.participants
+
+    participants_to_be_added = new_participants - participants
+    participants_to_be_deleted = participants - new_participants
+
+    participants_to_be_deleted.each do |part|
+      project.participants.delete part
     end
+
+    project.participants << participants_to_be_added
 
     render text: "Project got shared".to_json
 
