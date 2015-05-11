@@ -16,7 +16,12 @@ class FriendsController < ApplicationController
   end
 
   def index
-    response = { id: @user.id, name: @user.name, email: @user.email }
+    friends = @user.friends
+    response = []
+
+    friends.each do |friend|
+      response << { id: friend.id, name: friend.name, email: friend.email }
+    end
     render text: response.to_json
   end
 
