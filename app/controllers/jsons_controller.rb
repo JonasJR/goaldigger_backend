@@ -41,7 +41,14 @@ class JsonsController < ApplicationController
     item.done_by = @user.email
     item.save
 
-    init_GCM
+    GCM.host = 'https://android.googleapis.com/gcm/send'
+    # https://android.googleapis.com/gcm/send is default
+
+    GCM.format = :json
+    # :json is default and only available at the moment
+
+    GCM.key = "AIzaSyBGn6eZqajWPdx9QKRy1By2qAqYWiYEEg0"
+    # this is the apiKey obtained from here https://code.google.com/apis/console/
 
     destination = @user.reg_id
     # can be an string or an array of strings containing the regIds of the devices you want to send
@@ -200,6 +207,8 @@ class JsonsController < ApplicationController
 
     if @user.save
       render json: "Regid set to: #{@user.reg_id}"
+    else
+      render json: "Regit could not be set"
     end
   end
 
