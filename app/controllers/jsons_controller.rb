@@ -41,6 +41,14 @@ class JsonsController < ApplicationController
     item.done_by = @user.email
     item.save
 
+    destination = @user.reg_id
+    # can be an string or an array of strings containing the regIds of the devices you want to send
+
+    data = {:key => "value", :key2 => ["array", "value"]}
+    # must be an hash with all values you want inside you notification
+
+    GCM.send_notification( destination, data )
+
     render text: "Done: #{item.done}".to_json
   end
 
@@ -76,8 +84,9 @@ class JsonsController < ApplicationController
   def add_item
     item_hash = { name: params[:item_name], milestone_id: params[:milestone_id], user_id: @user.id }
     item = Item.new(item_hash)
+    milestone = Milestone.find(params[:milestone_id])
 
-    if item.save
+    if (milestone.project.user.id == @user.id) && item.save
       response = { success: true, item_name: item.name, item_id: item.id }
     else
       response = { success: false, message: item.errors.full_messages }
@@ -184,7 +193,26 @@ class JsonsController < ApplicationController
 
   end
 
+  def set_reg_id
+    @user.reg_id = params[:reg_id]
+
+    if @user.save
+      render json: "Regid set to: #{@user.reg_id}"
+    end
+  end
+
   private
+
+    def init_GCM
+      GCM.host = 'https://android.googleapis.com/gcm/send'
+      # https://android.googleapis.com/gcm/send is default
+
+      GCM.format = :json
+      # :json is default and only available at the moment
+
+      GCM.key = "AIzaSyBGn6eZqajWPdx9QKRy1By2qAqYWiYEEg0"
+      # this is the apiKey obtained from here https://code.google.com/apis/console/
+    end
 
     def user_params
       params.permit(:name, :email, :password, :password_confirmation)

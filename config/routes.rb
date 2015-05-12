@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       post '/create_friend'     => 'friends#create'
       post '/destroy_friend'    => 'friends#destroy'
       post '/share_project'     => 'jsons#share_project'
+      post '/set_reg_id'        => 'jsons#set_reg_id'
 
       get '/signup'             => 'jsons#signup'
     end
