@@ -41,6 +41,8 @@ class JsonsController < ApplicationController
     item.done_by = @user.email
     item.save
 
+    init_GCM
+
     destination = @user.reg_id
     # can be an string or an array of strings containing the regIds of the devices you want to send
 
