@@ -194,9 +194,9 @@ class JsonsController < ApplicationController
 
     participants_to_be_deleted.each do |part|
       project.participants.delete part
-      puts..................
+      puts ".................."
       puts part.inspect
-      puts..................
+      puts ".................."
     end
 
     project.participants << participants_to_be_added
