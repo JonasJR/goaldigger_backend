@@ -58,10 +58,10 @@ class JsonsController < ApplicationController
     destination = @user.reg_id.to_s
     # can be an string or an array of strings containing the regIds of the devices you want to send
 
-    data = {:Test => "Se ifall detta kommer fram"}
+    data = {:test => "Se ifall detta kommer fram"}
     # must be an hash with all values you want inside you notification
 
-    GCM.send_notification( destination, data.to.json )
+    GCM.send_notification( destination, data.to_json )
 
     render json: "Done: #{item.done}"
   end
