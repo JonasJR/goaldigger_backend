@@ -37,8 +37,13 @@ class JsonsController < ApplicationController
   def toggle_item
     item = Item.find(params[:item_id])
 
-    item.done = !item.done
-    item.done_by = @user.email
+    if item.done
+      item.done = false
+      item.done_by = ""
+    else
+      item.done = true
+      item.done_by = @user.email
+    end
     item.save
 
     GCM.host = 'https://android.googleapis.com/gcm/send'
@@ -50,7 +55,7 @@ class JsonsController < ApplicationController
     GCM.key = "AIzaSyBGn6eZqajWPdx9QKRy1By2qAqYWiYEEg0"
     # this is the apiKey obtained from here https://code.google.com/apis/console/
 
-    destination = @user.reg_id
+    destination = @user.reg_id.to_s
     # can be an string or an array of strings containing the regIds of the devices you want to send
 
     data = {:key => "value", :key2 => ["array", "value"]}
