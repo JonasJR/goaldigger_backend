@@ -61,7 +61,7 @@ class JsonsController < ApplicationController
     data = {:test => "Se ifall detta kommer fram"}
     # must be an hash with all values you want inside you notification
 
-    GCM.send_notification( destination, data.to_json )
+    GCM.send_notification( destination, data )
 
     render json: "Done: #{item.done}"
   end
