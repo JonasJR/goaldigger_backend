@@ -190,8 +190,10 @@ class JsonsController < ApplicationController
 
     users_to_be_notified = participants_to_be_added.map { |user| user.reg_id }
     notify_data = { message: "#{project.user.name} has added you to project #{project.name}" }
-    notify_users(users_to_be_notified, notify_data) unless users_to_be_notified.nil?
+    notify_users(users_to_be_notified, notify_data) unless (users_to_be_notified.nil? or users_to_be_notified.empty?)
 
+    puts "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    puts "Participants to be deleted: #{participants_to_be_deleted.inspect}"
     participants_to_be_deleted.each do |part|
       project.participants.delete part
       puts ".................."
