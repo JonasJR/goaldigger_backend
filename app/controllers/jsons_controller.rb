@@ -49,7 +49,7 @@ class JsonsController < ApplicationController
     users_to_be_notified = User.find(item.project.participants)
     users_to_be_notified.map! { |user| user.reg_id unless user.id == @user.id }
 
-    data = { data: { title: "#{user.name} has completed a task in project #{item.project.name}"}}
+    data = { data: { title: "#{user.name} has completed a task in project #{item.milestone.project.name}"}}
     # must be an hash with all values you want inside you notification
 
     notify_users(users_to_be_notified, data)
@@ -190,10 +190,13 @@ class JsonsController < ApplicationController
 
     users_to_be_notified = participants_to_be_added.map { |user| user.reg_id }
     notify_data = { message: "#{project.user.name} has added you to project #{project.name}" }
-    notify_users(users_to_be_notified, notify_data)
+    notify_users(users_to_be_notified, notify_data) unless users_to_be_notified.nil?
 
     participants_to_be_deleted.each do |part|
       project.participants.delete part
+      puts..................
+      puts part.inspect
+      puts..................
     end
 
     project.participants << participants_to_be_added
