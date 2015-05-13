@@ -52,16 +52,16 @@ class JsonsController < ApplicationController
     GCM.format = :json
     # :json is default and only available at the moment
 
-    GCM.key = "AIzaSyBGn6eZqajWPdx9QKRy1By2qAqYWiYEEg0"
+    GCM.key = "AIzaSyDwrw6wnLg6N0eq73KBL6fWC97ChMG-AMQ"
     # this is the apiKey obtained from here https://code.google.com/apis/console/
 
     destination = @user.reg_id.to_s
     # can be an string or an array of strings containing the regIds of the devices you want to send
 
-    data = {:key => "value", :key2 => ["array", "value"]}
+    data = {:Test => "Se ifall detta kommer fram"}
     # must be an hash with all values you want inside you notification
 
-    GCM.send_notification( destination, data )
+    GCM.send_notification( destination, data.to.json )
 
     render json: "Done: #{item.done}"
   end
