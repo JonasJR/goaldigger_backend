@@ -63,7 +63,7 @@ class JsonsController < ApplicationController
 
     GCM.send_notification( destination, data )
 
-    render text: "Done: #{item.done}".to_json
+    render json: "Done: #{item.done}"
   end
 
   def add_project
@@ -208,9 +208,7 @@ class JsonsController < ApplicationController
   end
 
   def set_reg_id
-    @user.reg_id = params[:reg_id]
-
-    if @user.save
+    if @user.update_attribute(:reg_id, params[:reg_id])
       render json: "Regid set to: #{@user.reg_id}"
     else
       render json: "Regit could not be set"
