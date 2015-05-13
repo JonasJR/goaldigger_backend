@@ -42,7 +42,7 @@ class JsonsController < ApplicationController
       item.done_by = ""
     else
       item.done = true
-      item.done_by = @user.email
+      item.done_by = @user.name
     end
     item.save
 
