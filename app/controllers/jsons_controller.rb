@@ -46,17 +46,13 @@ class JsonsController < ApplicationController
     end
     item.save
 
-    GCM.host = 'https://android.googleapis.com/gcm/send'
-    GCM.format = :json
-    GCM.key = "AIzaSyDwrw6wnLg6N0eq73KBL6fWC97ChMG-AMQ"
-
     users_to_be_notified = User.find(item.project.participants)
     users_to_be_notified.map! { |user| user.reg_id unless user.id == @user.id }
 
     data = { data: { title: "#{user.name} has completed a task in project #{item.project.name}"}}
     # must be an hash with all values you want inside you notification
 
-    GCM.send_notification( destination, data )
+    notify_users(users_to_be_notified, data)
 
     render json: "Done: #{item.done}"
   end
@@ -192,6 +188,10 @@ class JsonsController < ApplicationController
     participants_to_be_added = new_participants - participants
     participants_to_be_deleted = participants - new_participants
 
+    users_to_be_notified = participants_to_be_added.map { |user| user.reg_id }
+    notify_data = { message: "#{project.user.name} has added you to project #{project.name}" }
+    notify_users(users_to_be_notified, notify_data)
+
     participants_to_be_deleted.each do |part|
       project.participants.delete part
     end
@@ -212,15 +212,12 @@ class JsonsController < ApplicationController
 
   private
 
-    def init_GCM
+    def notify_users(users, notify_data)
       GCM.host = 'https://android.googleapis.com/gcm/send'
-      # https://android.googleapis.com/gcm/send is default
-
       GCM.format = :json
-      # :json is default and only available at the moment
+      GCM.key = "AIzaSyDwrw6wnLg6N0eq73KBL6fWC97ChMG-AMQ"
 
-      GCM.key = "AIzaSyBGn6eZqajWPdx9QKRy1By2qAqYWiYEEg0"
-      # this is the apiKey obtained from here https://code.google.com/apis/console/
+      GCM.send_notification(users, notify_data)
     end
 
     def user_params
