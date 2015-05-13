@@ -47,18 +47,13 @@ class JsonsController < ApplicationController
     item.save
 
     GCM.host = 'https://android.googleapis.com/gcm/send'
-    # https://android.googleapis.com/gcm/send is default
-
     GCM.format = :json
-    # :json is default and only available at the moment
-
     GCM.key = "AIzaSyDwrw6wnLg6N0eq73KBL6fWC97ChMG-AMQ"
-    # this is the apiKey obtained from here https://code.google.com/apis/console/
 
-    destination = @user.reg_id.to_s
-    # can be an string or an array of strings containing the regIds of the devices you want to send
+    users_to_be_notified = User.find(item.project.participants)
+    users_to_be_notified.map! { |user| user.reg_id unless user.id == @user.id }
 
-    data = {:test => "Se ifall detta kommer fram"}
+    data = { data: { title: "#{user.name} has completed a task in project #{item.project.name}"}}
     # must be an hash with all values you want inside you notification
 
     GCM.send_notification( destination, data )
