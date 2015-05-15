@@ -157,8 +157,11 @@ class JsonsController < ApplicationController
     end
   end
 
-  def change_password(new_password, old_password)
+  def change_password
     user = @user
+
+    old_password = params[:old_password]
+    new_password = params[:new_password]
 
     if user.authenticate(old_password)
       user.password = new_password
@@ -173,9 +176,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: "Your old password doesn't match your current password" }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end
+    render json: response
   end
 
   def share_project
@@ -192,13 +193,8 @@ class JsonsController < ApplicationController
     notify_data = { message: "#{project.user.name} has added you to project #{project.name}" }
     notify_users(users_to_be_notified, notify_data) unless (users_to_be_notified.nil? or users_to_be_notified.empty?)
 
-    puts "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    puts "Participants to be deleted: #{participants_to_be_deleted.inspect}"
     participants_to_be_deleted.each do |part|
       project.participants.delete part
-      puts ".................."
-      puts part.inspect
-      puts ".................."
     end
 
     project.participants << participants_to_be_added
