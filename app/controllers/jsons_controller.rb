@@ -189,7 +189,7 @@ class JsonsController < ApplicationController
     participants_to_be_added = new_participants - participants
     participants_to_be_deleted = participants - new_participants
 
-    users_to_be_notified = participants_to_be_added.map { |user| user.reg_id }
+    users_to_be_notified = participants_to_be_added
     notify_data = { message: "#{project.user.name} has added you to project #{project.name}" }
     notify_users(users_to_be_notified, notify_data) unless (users_to_be_notified.nil? or users_to_be_notified.empty?)
 
@@ -199,7 +199,7 @@ class JsonsController < ApplicationController
 
     project.participants << participants_to_be_added
 
-    render text: "Project got shared".to_json
+    render json: "Project got shared"
   end
 
   def leave_project
@@ -227,6 +227,7 @@ class JsonsController < ApplicationController
       GCM.format = :json
       GCM.key = "AIzaSyDwrw6wnLg6N0eq73KBL6fWC97ChMG-AMQ"
 
+      users.map! { |user| user.reg_id }
       GCM.send_notification(users, notify_data)
     end
 
