@@ -238,7 +238,7 @@ class JsonsController < ApplicationController
 
       users_to_be_notified = users.dup
       users_to_be_notified.map! {|user| user.reg_id}
-      GCM.send_notification(users, notify_data)
+      GCM.send_notification(users_to_be_notified, notify_data)
     end
 
     def user_params
