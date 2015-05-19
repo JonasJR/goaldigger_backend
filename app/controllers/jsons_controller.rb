@@ -37,9 +37,6 @@ class JsonsController < ApplicationController
   def toggle_item
     item = Item.find(params[:item_id])
 
-    users_to_be_notified = item.milestone.project.participants.to_a
-    users_to_be_notified.map! { |user| user unless user.id == @user.id }
-
     if item.done
       item.done = false
       item.done_by = ""
@@ -54,7 +51,12 @@ class JsonsController < ApplicationController
     end
     item.save
 
-    notify_users(users_to_be_notified, data)
+    users_to_be_notified = item.milestone.project.participants
+    unless users_to_be_notified.nil?
+      users_to_be_notified = users_to_be_notified.map { |user| user unless user.id == @user.id }
+      puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
+      notify_users(users_to_be_notified, data) if users_to_be_notified.length > 0
+    end
 
     render json: "Done: #{item.done}"
   end
