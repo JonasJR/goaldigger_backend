@@ -57,7 +57,6 @@ class JsonsController < ApplicationController
     if users_to_be_notified > 0
         puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
         notify_users(users_to_be_notified, data) if users_to_be_notified.length > 0
-      end
     end
 
     render json: "Done: #{item.done}"
