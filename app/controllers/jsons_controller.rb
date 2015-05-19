@@ -206,9 +206,8 @@ class JsonsController < ApplicationController
     project = Project.find(params[:project_id])
 
     project.participants.delete(@user)
-    participants = User.find(project.participants)
 
-    notify_users(participants, { message: "#{@user.email} has left project #{project.name}" })
+    notify_users(project.participants, { message: "#{@user.email} has left project #{project.name}" })
     render json: "#{@user.email} has left project #{project.name}"
   end
 
