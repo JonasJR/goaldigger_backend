@@ -51,10 +51,10 @@ class JsonsController < ApplicationController
     end
     item.save
 
-    users_to_be_notified = item.milestone.project.participants
-    unless users_to_be_notified.nil?
-      users_to_be_notified = users_to_be_notified.map { |user| user unless user.id == @user.id }
-      unless users_to_be_notified.nil?
+    users_to_be_notified = item.milestone.project.participants.to_a
+    users_to_be_notified.delete(@user.id)
+
+    if users_to_be_notified > 0
         puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
         notify_users(users_to_be_notified, data) if users_to_be_notified.length > 0
       end
@@ -213,7 +213,7 @@ class JsonsController < ApplicationController
 
     project.participants.delete(@user)
 
-    notify_users(project.participants, { message: "#{@user.email} has left project #{project.name}" })
+    notify_users(project.participants.to_a, { message: "#{@user.email} has left project #{project.name}" })
     render json: "#{@user.email} has left project #{project.name}"
   end
 
