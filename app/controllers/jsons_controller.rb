@@ -46,7 +46,7 @@ class JsonsController < ApplicationController
     end
     item.save
 
-    users_to_be_notified = User.find(item.project.participants)
+    users_to_be_notified = User.find(item.milestone.project.participants)
     users_to_be_notified.map! { |user| user.reg_id unless user.id == @user.id }
 
     data = { data: { title: "#{user.name} has completed task #{item.name} in project #{item.milestone.project.name}"}}
@@ -227,7 +227,8 @@ class JsonsController < ApplicationController
       GCM.format = :json
       GCM.key = "AIzaSyDwrw6wnLg6N0eq73KBL6fWC97ChMG-AMQ"
 
-      users.map! { |user| user.reg_id }
+      users_to_be_notified = users.dup
+      users_to_be_notified.map! {|user| user.reg_id}
       GCM.send_notification(users, notify_data)
     end
 
