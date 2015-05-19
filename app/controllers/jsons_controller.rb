@@ -46,7 +46,7 @@ class JsonsController < ApplicationController
     end
     item.save
 
-    users_to_be_notified = item.milestone.project.participants
+    users_to_be_notified = item.milestone.project.participants.to_a
     users_to_be_notified.map! { |user| user.reg_id unless user.id == @user.id }
 
     data = { data: { title: "#{user.name} has completed task #{item.name} in project #{item.milestone.project.name}"}}
