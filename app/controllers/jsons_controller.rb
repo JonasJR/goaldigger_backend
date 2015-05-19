@@ -54,8 +54,10 @@ class JsonsController < ApplicationController
     users_to_be_notified = item.milestone.project.participants
     unless users_to_be_notified.nil?
       users_to_be_notified = users_to_be_notified.map { |user| user unless user.id == @user.id }
-      puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
-      notify_users(users_to_be_notified, data) if users_to_be_notified.length > 0
+      unless users_to_be_notified.nil?
+        puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
+        notify_users(users_to_be_notified, data) if users_to_be_notified.length > 0
+      end
     end
 
     render json: "Done: #{item.done}"
