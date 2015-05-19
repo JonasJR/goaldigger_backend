@@ -38,7 +38,7 @@ class JsonsController < ApplicationController
     item = Item.find(params[:item_id])
 
     users_to_be_notified = item.milestone.project.participants.to_a
-    users_to_be_notified.map! { |user| user.reg_id unless user.id == @user.id }
+    users_to_be_notified.map! { |user| user unless user.id == @user.id }
 
     if item.done
       item.done = false
