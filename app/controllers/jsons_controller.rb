@@ -212,10 +212,11 @@ class JsonsController < ApplicationController
     project = Project.find(params[:project_id])
 
     project.participants.delete(@user)
-    users_to_be_notified = project.participants.to_a + project.user
+    users_to_be_notified =  project.participants.to_a
+    users_to_be_notified << project.user
 
     if users_to_be_notified.length > 0
-      notify_users(project.participants.to_a, { message: "#{@user.email} has left project #{project.name}" })
+      notify_users(users_to_be_notified, { message: "#{@user.email} has left project #{project.name}" })
     end
 
     render json: "#{@user.email} has left project #{project.name}"
