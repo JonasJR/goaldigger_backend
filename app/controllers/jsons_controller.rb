@@ -200,7 +200,15 @@ class JsonsController < ApplicationController
     project.participants << participants_to_be_added
 
     render text: "Project got shared".to_json
+  end
 
+  def leave_project
+    project = Project.find(params[:project_id])
+
+    project.participants.delete(@user)
+
+    notify_users(project.participants, { message: "#{@user.email} has left project #{project.name}" })
+    render json: "#{@user.email} has left project #{project.name}"
   end
 
   def set_reg_id
