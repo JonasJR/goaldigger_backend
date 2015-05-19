@@ -53,7 +53,7 @@ class JsonsController < ApplicationController
 
     users_to_be_notified =  item.milestone.project.participants.to_a
     users_to_be_notified << item.milestone.project.user
-    users_to_be_notified.delete(@user.id)
+    users_to_be_notified.delete(@user)
 
     if users_to_be_notified.length > 0
         puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
