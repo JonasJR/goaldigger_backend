@@ -12,7 +12,7 @@ class FriendsController < ApplicationController
     else
       response = { success: false, message: "Could not add friend" }
     end
-    render text: response.to_json
+    render json: response
   end
 
   def index
@@ -22,7 +22,7 @@ class FriendsController < ApplicationController
     friends.each do |friend|
       response << { id: friend.id, name: friend.name, email: friend.email }
     end
-    render text: response.to_json
+    render json: response
   end
 
   def search
@@ -34,7 +34,7 @@ class FriendsController < ApplicationController
       return_list << friend unless (@user.friends.include? friend) or friend == @user
     end
 
-    render text: return_list.to_json
+    render json: return_list
   end
 
   private
@@ -49,9 +49,7 @@ class FriendsController < ApplicationController
       if user && user.authenticate(params[:password])
         @user = user
       else
-        respond_to do |format|
-          format.json { render text: "Please log in first".to_json }
-        end
+        render json: "Please log in first"
       end
     end
 

@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @projects = user.projects.all
 
     respond_to do |format|
-      format.json { render text: @projects.to_json}
+      format.json { render json: @projects }
       format.html { render }
     end
   end

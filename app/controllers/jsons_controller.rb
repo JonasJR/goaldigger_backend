@@ -12,9 +12,9 @@ class JsonsController < ApplicationController
     user = User.find_by(email: email)
 
     if (user && user.authenticate(password))
-      render text: {name: user.name, email: email, success: true}.to_json
+      render json: { name: user.name, email: email, success: true }
     else
-      render text: {message: "Invalid username or password", success: false}.to_json
+      render json: { message: "Invalid username or password", success: false }
     end
   end
 
@@ -51,7 +51,6 @@ class JsonsController < ApplicationController
     users_to_be_notified.delete(@user)
 
     if users_to_be_notified.length > 0
-        puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
         notify_users(users_to_be_notified, data) if users_to_be_notified.length > 0
     end
 
@@ -67,9 +66,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: @user.projects.errors.full_messages }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end
+      render json: response
   end
 
   def delete_project
@@ -78,13 +75,11 @@ class JsonsController < ApplicationController
     else
       response = { success: false, message: "Project not found" }
     end
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end
+      render json: response
   end
 
   def projects
-    render text: render_projects(@user).to_json
+    render json: render_projects(@user)
   end
 
   def add_item
@@ -97,7 +92,7 @@ class JsonsController < ApplicationController
     else
       response = { success: false, message: item.errors.full_messages }
     end
-    render text: response.to_json
+    render json: response
   end
 
   def delete_item
@@ -109,7 +104,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: item.errors.full_messages }
     end
 
-    render text: response.to_json
+    render json: response
   end
 
   def add_milestone
@@ -123,7 +118,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: milestone.errors.full_messages }
     end
 
-    render text: response.to_json
+    render json: response
   end
 
   def delete_milestone
@@ -136,9 +131,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: milestone.errors.full_messages }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end
+      render json: response
   end
 
   def reset_password
@@ -149,12 +142,11 @@ class JsonsController < ApplicationController
     user.password = new_pass
     user.password_confirmation = new_pass
 
-
     if user.save
       UserMailer.send_recovery_password(email, new_pass).deliver_now
-      render text: { success: true, message: "Password sent to email: #{email}" }.to_json
+      render json: { success: true, message: "Password sent to email: #{email}" }
     else
-      render text: { success: false, message: "Couldn't send email" }
+      render json: { success: false, message: "Couldn't send email" }
     end
   end
 
@@ -247,7 +239,7 @@ class JsonsController < ApplicationController
       if user && user.authenticate(params[:password])
         @user = user
       else
-        render text: "Please log in first".to_json
+        render json: "Please log in first"
       end
     end
 
