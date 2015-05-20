@@ -62,6 +62,7 @@ class JsonsController < ApplicationController
 
     if project = @user.projects.create(project_name)
       response = { success: true, project_id: project.id, project_name: project.name, project_description: project.description }
+      project.milestones.create(name: project.name)
     else
       response = { success: false, message: @user.projects.errors.full_messages }
     end
