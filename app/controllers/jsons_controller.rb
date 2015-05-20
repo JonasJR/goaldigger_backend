@@ -33,28 +33,30 @@ class JsonsController < ApplicationController
   def toggle_item
     item = Item.find(params[:item_id])
 
-    item.done = !item.done
-    item.done_by = @user.email
+    if item.done
+      item.done = false
+      item.done_by = ""
+
+      data = { message: "#{@user.name} has un-completed task #{item.name} in project #{item.milestone.project.name}" }
+    else
+      item.done = true
+      item.done_by = @user.name
+
+      data = { message: "#{@user.name} has completed task #{item.name} in project #{item.milestone.project.name}" }
+
+    end
     item.save
 
-    GCM.host = 'https://android.googleapis.com/gcm/send'
-    # https://android.googleapis.com/gcm/send is default
+    users_to_be_notified =  item.milestone.project.participants.to_a
+    users_to_be_notified << item.milestone.project.user
+    users_to_be_notified.delete(@user)
 
-    GCM.format = :json
-    # :json is default and only available at the moment
+    if users_to_be_notified.length > 0
+        puts "---------USERS TO BE NOTIFIED: #{users_to_be_notified.inspect}"
+        notify_users(users_to_be_notified, data) if users_to_be_notified.length > 0
+    end
 
-    GCM.key = "AIzaSyBGn6eZqajWPdx9QKRy1By2qAqYWiYEEg0"
-    # this is the apiKey obtained from here https://code.google.com/apis/console/
-
-    destination = @user.reg_id
-    # can be an string or an array of strings containing the regIds of the devices you want to send
-
-    data = {:key => "value", :key2 => ["array", "value"]}
-    # must be an hash with all values you want inside you notification
-
-    GCM.send_notification( destination, data )
-
-    render text: "Done: #{item.done}".to_json
+    render json: "Done: #{item.done}"
   end
 
   def add_project
@@ -157,8 +159,11 @@ class JsonsController < ApplicationController
     end
   end
 
-  def change_password(new_password, old_password)
+  def change_password
     user = @user
+
+    old_password = params[:old_password]
+    new_password = params[:new_password]
 
     if user.authenticate(old_password)
       user.password = new_password
@@ -173,9 +178,7 @@ class JsonsController < ApplicationController
       response = { success: false, message: "Your old password doesn't match your current password" }
     end
 
-    respond_to do |format|
-      format.json { render text: response.to_json }
-    end
+    render json: response
   end
 
   def share_project
@@ -188,20 +191,35 @@ class JsonsController < ApplicationController
     participants_to_be_added = new_participants - participants
     participants_to_be_deleted = participants - new_participants
 
+    users_to_be_notified = participants_to_be_added
+    notify_data = { message: "#{project.user.name} has added you to project #{project.name}" }
+    notify_users(users_to_be_notified, notify_data) unless (users_to_be_notified.nil? or users_to_be_notified.empty?)
+
     participants_to_be_deleted.each do |part|
       project.participants.delete part
     end
 
     project.participants << participants_to_be_added
 
-    render text: "Project got shared".to_json
+    render json: "Project got shared"
+  end
 
+  def leave_project
+    project = Project.find(params[:project_id])
+
+    project.participants.delete(@user)
+    users_to_be_notified =  project.participants.to_a
+    users_to_be_notified << project.user
+
+    if users_to_be_notified.length > 0
+      notify_users(users_to_be_notified, { message: "#{@user.email} has left project #{project.name}" })
+    end
+
+    render json: "#{@user.email} has left project #{project.name}"
   end
 
   def set_reg_id
-    @user.reg_id = params[:reg_id]
-
-    if @user.save
+    if @user.update_attribute(:reg_id, params[:reg_id])
       render json: "Regid set to: #{@user.reg_id}"
     else
       render json: "Regit could not be set"
@@ -210,15 +228,14 @@ class JsonsController < ApplicationController
 
   private
 
-    def init_GCM
+    def notify_users(users, notify_data)
       GCM.host = 'https://android.googleapis.com/gcm/send'
-      # https://android.googleapis.com/gcm/send is default
-
       GCM.format = :json
-      # :json is default and only available at the moment
+      GCM.key = "AIzaSyDwrw6wnLg6N0eq73KBL6fWC97ChMG-AMQ"
 
-      GCM.key = "AIzaSyBGn6eZqajWPdx9QKRy1By2qAqYWiYEEg0"
-      # this is the apiKey obtained from here https://code.google.com/apis/console/
+      users_to_be_notified = users.dup
+      users_to_be_notified.map! {|user| user.reg_id}
+      GCM.send_notification(users_to_be_notified, notify_data)
     end
 
     def user_params
