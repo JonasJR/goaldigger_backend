@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  has_many :projects
+  has_many :projects, dependent: :destroy
   has_many :items
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
-  has_many :collaborations
+  has_many :collaborations, dependent: :destroy
   has_many :shared_projects, through: :collaborations, source: :project
 
   validates :name, presence: true, length: { maximum: 50 }

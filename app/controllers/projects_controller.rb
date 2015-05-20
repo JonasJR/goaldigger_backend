@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
     if project.save
       redirect_to user_projects_path(user)
     else
-      rener :new
+      render :new
     end
   end
 
