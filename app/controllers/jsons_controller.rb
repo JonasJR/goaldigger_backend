@@ -24,8 +24,7 @@ class JsonsController < ApplicationController
     if user.save
       response = { name: user.name, email: user.email, success: true }
     else
-      response = user.errors.full_messages
-      response[:success] = false
+      response = { errors: user.errors.full_messages, success: false }
     end
       render json: response
   end
