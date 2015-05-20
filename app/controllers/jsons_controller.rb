@@ -22,16 +22,12 @@ class JsonsController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      response = {}
-      response[:name] = user.name
-      response[:email] = user.email
-      response = response.to_json
+      response = { name: user.name, email: user.email, success: true }
     else
-      response = user.errors.to_json
+      response = user.errors.full_messages
+      response[:success] = false
     end
-    respond_to do |format|
-      format.json { render text: response }
-    end
+      render json: response
   end
 
   def toggle_item
