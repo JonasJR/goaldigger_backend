@@ -8,8 +8,13 @@ class User < ActiveRecord::Base
   has_many :shared_projects, through: :collaborations, source: :project
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :email, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :password, presence: true, length: { minimum: 6, maximum: 255 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\-.]+\.[a-z]+\z/i
+  validates :email, presence: true,
+                    length: { maximum: 50 },
+                    uniqueness: true,
+                    format: { with: VALID_EMAIL_REGEX },
+
 
   has_secure_password
 
